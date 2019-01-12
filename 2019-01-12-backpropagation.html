@@ -6,15 +6,39 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://stupidjoey.net">
-  <title>Archives: 2016 | stupidjoey&#39;s blog</title>
+  <title>stupidjoey&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="一、理论推导 背景 backpropagation B部分 A部分 整理起来     二、梯度消失\爆炸问题 三、代码   一、理论推导背景 一个多层神经网络的正向传播过程如图 给定一些符号 它们之间的计算关系如上图，z表示每个神经单元的输入，a表示经过激活函数计算后的值  在训练神经网络的时候，我们一般采用梯度下降的方式，对于网络中的每个参数，其更新的方式是loss function在这个参">
+<meta property="og:type" content="article">
 <meta property="og:title" content="stupidjoey&#39;s blog">
-<meta property="og:url" content="http://stupidjoey.net/archives/2016/index.html">
+<meta property="og:url" content="http://stupidjoey.net/2019-01-12-backpropagation.html">
 <meta property="og:site_name" content="stupidjoey&#39;s blog">
+<meta property="og:description" content="一、理论推导 背景 backpropagation B部分 A部分 整理起来     二、梯度消失\爆炸问题 三、代码   一、理论推导背景 一个多层神经网络的正向传播过程如图 给定一些符号 它们之间的计算关系如上图，z表示每个神经单元的输入，a表示经过激活函数计算后的值  在训练神经网络的时候，我们一般采用梯度下降的方式，对于网络中的每个参数，其更新的方式是loss function在这个参">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51071766-6c075680-1691-11e9-87e4-b62c24616276.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51071801-e6d07180-1691-11e9-9549-d8d814c9d702.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51071812-14b5b600-1692-11e9-84b9-53c9e1ec5d4f.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51071818-2ac37680-1692-11e9-8440-db2fa3627fff.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51071840-770eb680-1692-11e9-9e24-f9780685ba87.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51071890-60b52a80-1693-11e9-8d89-c37cbc87fb5e.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51071932-0ec0d480-1694-11e9-98e6-2645dd254cde.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51071951-547d9d00-1694-11e9-8e66-4d70420cb8cc.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51071953-5b0c1480-1694-11e9-8255-1163c7ca9190.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51071956-6101f580-1694-11e9-966c-9334035c7ee1.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51072134-b4754300-1696-11e9-9e07-3b5571cea36e.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51072152-fd2cfc00-1696-11e9-8eaa-eaccf8b9da35.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51072162-35343f00-1697-11e9-9af5-034c6f01a63b.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51072195-cb686500-1697-11e9-8ca3-208924b18ace.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51072187-a07e1100-1697-11e9-8619-b37ea3d47d81.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51072236-724d0100-1698-11e9-9981-d02285f87db6.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51072255-b50ed900-1698-11e9-9543-990563be548e.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51072248-a0cadc00-1698-11e9-9ff7-61a8aaa55084.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51072366-9b6e9100-169a-11e9-8a1f-624ff412fa54.jpg">
+<meta property="og:updated_time" content="2019-01-12T10:57:52.502Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="stupidjoey&#39;s blog">
+<meta name="twitter:description" content="一、理论推导 背景 backpropagation B部分 A部分 整理起来     二、梯度消失\爆炸问题 三、代码   一、理论推导背景 一个多层神经网络的正向传播过程如图 给定一些符号 它们之间的计算关系如上图，z表示每个神经单元的输入，a表示经过激活函数计算后的值  在训练神经网络的时候，我们一般采用梯度下降的方式，对于网络中的每个参数，其更新的方式是loss function在这个参">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/7859870/51071766-6c075680-1691-11e9-87e4-b62c24616276.png">
   
     <link rel="alternative" href="/atom.xml" title="stupidjoey&#39;s blog" type="application/atom+xml">
   
@@ -150,60 +174,227 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-backpropagation" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<ul>
+<li><a href="#一-理论推导">一、理论推导</a><ul>
+<li><a href="#背景">背景</a></li>
+<li><a href="#backpropagation">backpropagation</a><ul>
+<li><a href="#b部分">B部分</a></li>
+<li><a href="#a部分">A部分</a></li>
+<li><a href="#整理起来">整理起来</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#二-梯度消失爆炸问题">二、梯度消失\爆炸问题</a></li>
+<li><a href="#三-代码">三、代码</a></li>
+</ul>
+<!-- tocstop -->
+<h3><span id="一-理论推导">一、理论推导</span></h3><h4><span id="背景">背景</span></h4><p><img src="https://user-images.githubusercontent.com/7859870/51071766-6c075680-1691-11e9-87e4-b62c24616276.png" alt="image"></p>
+<p>一个多层神经网络的正向传播过程如图<br><img src="https://user-images.githubusercontent.com/7859870/51071801-e6d07180-1691-11e9-9549-d8d814c9d702.png" alt="image"></p>
+<p>给定一些符号<br><img src="https://user-images.githubusercontent.com/7859870/51071812-14b5b600-1692-11e9-84b9-53c9e1ec5d4f.png" alt="image"><br><img src="https://user-images.githubusercontent.com/7859870/51071818-2ac37680-1692-11e9-8440-db2fa3627fff.png" alt="image"></p>
+<p>它们之间的计算关系如上图，z表示每个神经单元的输入，a表示经过激活函数计算后的值</p>
+<p><img src="https://user-images.githubusercontent.com/7859870/51071840-770eb680-1692-11e9-9e24-f9780685ba87.png" alt="image"></p>
+<p>在训练神经网络的时候，我们一般采用梯度下降的方式，对于网络中的每个参数，其更新的方式是loss function在这个参数的负梯度方向，因此我们需要用loss function对每个参数求梯度。在网络很深且神经单元很多的时，计算量很大。较为高效的方式是通过back propagation来求，它从最后一层开始计算，前面的层会复用后面层已经计算好的值，减少计算量。</p>
+<h4><span id="backpropagation">backpropagation</span></h4><p><img src="https://user-images.githubusercontent.com/7859870/51071890-60b52a80-1693-11e9-8d89-c37cbc87fb5e.png" alt="image"></p>
+<p>BP算法的基础是链式法则</p>
+<p><img src="https://user-images.githubusercontent.com/7859870/51071932-0ec0d480-1694-11e9-98e6-2645dd254cde.png" alt="image"></p>
+<p>当我们求loss func对某一个参数的偏导数时，可以把它拆分成A和B两个部分。先看B部分</p>
+<h5><span id="b部分">B部分</span></h5><p><img src="https://user-images.githubusercontent.com/7859870/51071951-547d9d00-1694-11e9-8e66-4d70420cb8cc.png" alt="image"><br><img src="https://user-images.githubusercontent.com/7859870/51071953-5b0c1480-1694-11e9-8255-1163c7ca9190.png" alt="image"><br><img src="https://user-images.githubusercontent.com/7859870/51071956-6101f580-1694-11e9-966c-9334035c7ee1.png" alt="image"></p>
+<p>B部分的计算比较简单。</p>
+<h5><span id="a部分">A部分</span></h5><p><img src="https://user-images.githubusercontent.com/7859870/51072134-b4754300-1696-11e9-9e07-3b5571cea36e.png" alt="image"></p>
+<p>A部分的计算相对麻烦一点，我们先将符号简化一下，从后往前计算这个偏导，前面的会复用后面已经算好的值</p>
+<p><img src="https://user-images.githubusercontent.com/7859870/51072152-fd2cfc00-1696-11e9-8eaa-eaccf8b9da35.png" alt="image"></p>
+<p>最后一层的计算方式如图，具体情况要看激活函数的选择以及loss func的选择</p>
+<p><img src="https://user-images.githubusercontent.com/7859870/51072162-35343f00-1697-11e9-9af5-034c6f01a63b.png" alt="image"></p>
+<p>可以推导出前面一层的值跟后面一层的值的关系<br><img src="https://user-images.githubusercontent.com/7859870/51072195-cb686500-1697-11e9-8ca3-208924b18ace.png" alt="image"></p>
+<p>最后可以得到这种形式<br><img src="https://user-images.githubusercontent.com/7859870/51072187-a07e1100-1697-11e9-8619-b37ea3d47d81.png" alt="image"></p>
+<p>反过来看，前面一层的偏导等于后面一层的偏导乘以权重的加和再乘以激活函数的偏导，有一种反向传播的意思。<br><img src="https://user-images.githubusercontent.com/7859870/51072236-724d0100-1698-11e9-9981-d02285f87db6.png" alt="image"></p>
+<p>层与层之间整理成如图的形式<br><img src="https://user-images.githubusercontent.com/7859870/51072255-b50ed900-1698-11e9-9543-990563be548e.png" alt="image"></p>
+<h5><span id="整理起来">整理起来</span></h5><p><img src="https://user-images.githubusercontent.com/7859870/51072248-a0cadc00-1698-11e9-9ff7-61a8aaa55084.png" alt="image"></p>
+<p>BP算法其实包含了两个过程，在forward的过程中，把需要计算的z和a的值都计算好了；在backword的过程中，从后往前计算偏导。</p>
+<h3><span id="二-梯度消失爆炸问题">二、梯度消失\爆炸问题</span></h3><p>如果参数初始化不当，或者选择的激活函数有问题（如sigmoid），大概率会出现 梯度消失or梯度爆炸的问题</p>
+<p>可以参考<br><a href="https://blog.csdn.net/baidu_29782299/article/details/52742773" target="_blank" rel="noopener">https://blog.csdn.net/baidu_29782299/article/details/52742773</a><br><a href="https://www.zhihu.com/question/49812013" target="_blank" rel="noopener">https://www.zhihu.com/question/49812013</a></p>
+<h3><span id="三-代码">三、代码</span></h3><p>to do…</p>
+<p>reference<br>[1] <a href="https://www.csie.ntu.edu.tw/~yvchen/f106-adl/doc/170925+170928_BackProp.pdf" target="_blank" rel="noopener">https://www.csie.ntu.edu.tw/~yvchen/f106-adl/doc/170925+170928_BackProp.pdf</a></p>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/7859870/51072366-9b6e9100-169a-11e9-8a1f-624ff412fa54.jpg" alt="38db85a4c595ca6"></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016-07-02-computational-ad-basic-concepts.html" class="archive-article-date">
-  	<time datetime="2016-07-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-07-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016-07-02-computational-ad-basic-concepts.html">计算广告基础概念整理</a>
-    </h1>
-  
+      <span id="busuanzi_container_page_pv">
+        | 阅读量(<span id="busuanzi_value_page_pv"></span>)
+      </span>
+      
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">计算广告</a>
-        		</li>
-      		
-		</ul>
-	</div>
+      
 
-          
-
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://stupidjoey.net/2019-01-12-backpropagation.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018-10-07-Wide-And-Deep-Learning-for-Recommender-Systems.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Wide &amp; Deep Learning for Recommender Systems</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">一、理论推导</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.</span> <span class="toc-text">backpropagation</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.1.</span> <span class="toc-text">B部分</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.2.</span> <span class="toc-text">A部分</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.3.</span> <span class="toc-text">整理起来</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">二、梯度消失\爆炸问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">三、代码</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
+
+
+<div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div> 
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+
+if(true){
+    var gitalk = new Gitalk({
+    clientID: 'e3ec66beebb8404d6ca4',
+    clientSecret: 'd7e6535362e314cd41926ca9c6ae34084365c29d',
+    repo: 'comment_for_blog',
+    owner: 'stupidjoey',
+    admin: ['stupidjoey'],
+    id: 'Sat Jan 12 2019 18:57:52 GMT+0800',
+    distractionFreeMode: 'true'
+})
+gitalk.render('gitalk-container') 
+}
+</script>
+
+
+
+
+
 
 
           </div>
@@ -231,8 +422,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
