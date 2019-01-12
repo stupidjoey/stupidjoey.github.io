@@ -182,9 +182,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>　　入职后发现自己所在的部门是在做广告变现这一块，所以买了刘鹏的<code>《计算广告》</code>这本书来学习一下，算是国内对计算广告这一块做总结和整理的第一本书吧。本文主要对书中提到的一些基础概念做一些简单的整理。</p>
+        <p>入职后发现自己所在的部门是在做广告变现这一块，所以买了刘鹏的<code>《计算广告》</code>这本书来学习一下，算是国内对计算广告这一块做总结和整理的第一本书吧。本文主要对书中提到的一些基础概念做一些简单的整理。</p>
 <a id="more"></a>
-<h2 id="常见概念及缩写"><a href="#常见概念及缩写" class="headerlink" title="常见概念及缩写"></a>常见概念及缩写</h2><p>　　介绍一下在计算广告中常常要涉及到的概念，在后文中会对其做出解释。</p>
+<h2><span id="常见概念及缩写">常见概念及缩写</span></h2><p>　　介绍一下在计算广告中常常要涉及到的概念，在后文中会对其做出解释。</p>
 <ul>
 <li>ADX (AD eXchange)　　广告交易平台</li>
 <li>ADN (AD Network)　　广告网络</li>
@@ -205,15 +205,15 @@
 <li>SSP (Supply Side Platform)　　供给方平台</li>
 <li>TD (Trading Desk)　　交易终端</li>
 </ul>
-<h2 id="广告的定义"><a href="#广告的定义" class="headerlink" title="广告的定义"></a>广告的定义</h2><p>　　书中先援引了《当代广告学》中对于广告的定义:</p>
+<h2><span id="广告的定义">广告的定义</span></h2><p>　　书中先援引了《当代广告学》中对于广告的定义:</p>
 <blockquote>
 <p>广告是由已确定的出资人通过各种媒介进行的有关产品（商品、服务和观点）的，通常是有偿的、有组织的、综合的、劝服性的非人员的信息传播活动。</p>
 </blockquote>
 <p>　　讲的是什么鬼，完全看不懂。但是没关系，里面指出了广告活动的两个主动参与方——<strong>出资人</strong>和<strong>媒体</strong>，可以用更一般性的词语来描述：广告的<strong>需求方</strong>和<strong>供给方</strong>。除此之外，这里面还有一个被动的参与方，受众。<strong>出资人、媒体和受众</strong>这三者是广告活动永远的主线，在计算广告中，也不例外。</p>
-<h2 id="广告的有效性模型"><a href="#广告的有效性模型" class="headerlink" title="广告的有效性模型"></a>广告的有效性模型</h2><p><img src="http://o9pzffu9y.bkt.clouddn.com/computational-ad-basic-concepts-1.jpg" alt="ad flow"></p>
+<h2><span id="广告的有效性模型">广告的有效性模型</span></h2><p><img src="http://o9pzffu9y.bkt.clouddn.com/computational-ad-basic-concepts-1.jpg" alt="ad flow"></p>
 <p>（图1 广告的有效性模型  来源于《计算广告》）</p>
 <p>　　如图1是广告的有效性模型，大致可以分为<strong>选择、解释和态度</strong>三个部分，更细致一点可以划分为6个过程。其中<strong>曝光</strong>指广告物理上展现出来的过程，广告位的影响是巨大的；<strong>关注</strong>指受众从物理上接触广告到意识上注意到它的过程，曝光并不等同于关注，尽量不要打断用户的任务以及明确传达推送此广告的原因会提高关注阶段的效率；<strong>理解</strong>指用户能够理解广告，不要搞得太玄乎；<strong>接受</strong>指在理解广告的基础上认可这些信息，如果传达的信息不适当，可能会起到负面的效果；<strong>保持</strong>阶段指用户对于广告的印象，如果能留下长期的记忆，那是再好不过啦；<strong>决策</strong>，最后的转化再次一举。</p>
-<h2 id="计算广告的核心问题"><a href="#计算广告的核心问题" class="headerlink" title="计算广告的核心问题"></a>计算广告的核心问题</h2><p>　　<a href="https://en.wikipedia.org/wiki/Andrei_Broder" target="_blank" rel="noopener"><code>Andrei Broder</code></a>(并不认识 - -)在提出计算广告概念的同时，也提出了它的核心挑战：</p>
+<h2><span id="计算广告的核心问题">计算广告的核心问题</span></h2><p>　　<a href="https://en.wikipedia.org/wiki/Andrei_Broder" target="_blank" rel="noopener"><code>Andrei Broder</code></a>(并不认识 - -)在提出计算广告概念的同时，也提出了它的核心挑战：</p>
 <blockquote>
 <p>Find the best match between a given user in a given context and a suitable advertisement</p>
 </blockquote>
@@ -228,7 +228,7 @@
 <p>　　如果进一步的分解，可以认为收入和成本都是与广告<code>a</code>、用户<code>u</code>以及上下文环境<code>c</code>有关系的</p>
 <p>$$ max\sum _{i=1}^{T}(r(a_i,u_i,c_i)-q(a_i,u_i,c_i)) $$</p>
 <p>　　当然，这里的假设是整体的收入和成本是可以分解到每次展示上的，实际中会采取频次控制、点击反馈等方式来对付多次展示之间的效果相关性问题。</p>
-<h2 id="在线广告简史"><a href="#在线广告简史" class="headerlink" title="在线广告简史"></a>在线广告简史</h2><p>　　在线媒体（如AOL、Yahoo!）刚产生的时候，流量变现的最基本方式就是照搬线下广告的<strong>合约式的展示方式</strong>，即按照合同的方式确定某一广告位一段时间内为某广告主独占。随着互联网的高速发展，媒体希望提高收入，他们发现可以通过用户定向来把同一广告位的不同受众群体卖给不同广告主，提高流量收入，这种广告投放方式成为<strong>定向广告</strong>。它实际上还是以合约的方式来进行，媒体向广告主保证投放量，这种称为<strong>担保式投送（GD）</strong>，遵循千次展示付费的计费方式（CPM）。</p>
+<h2><span id="在线广告简史">在线广告简史</span></h2><p>　　在线媒体（如AOL、Yahoo!）刚产生的时候，流量变现的最基本方式就是照搬线下广告的<strong>合约式的展示方式</strong>，即按照合同的方式确定某一广告位一段时间内为某广告主独占。随着互联网的高速发展，媒体希望提高收入，他们发现可以通过用户定向来把同一广告位的不同受众群体卖给不同广告主，提高流量收入，这种广告投放方式成为<strong>定向广告</strong>。它实际上还是以合约的方式来进行，媒体向广告主保证投放量，这种称为<strong>担保式投送（GD）</strong>，遵循千次展示付费的计费方式（CPM）。</p>
 <p>　　随着受众定向的不断发展，定向的程度越来越精细，按照原来的合约式的方式来售卖广告会有很多麻烦，例如很难对精细的标签流量做准确预估，另外当一个展示满足多个合约时，如果仅仅按照投放量的简单约束来分配广告，可能会使收益无法最大化，于是放弃了合约的思路，进化出了革命性的产品模式——<strong>竞价广告</strong>。实际上，竞价广告最初诞生于搜索广告领域，因为搜索上可以非常精细地进行定向，所以自然地采用了竞价的方式售卖广告。产生竞价广告的原因就是对每一次展示都可以按照收益最高的原则来做决策。在这种模式下，供给方不再向广告主做出量的保证。</p>
 <p>　　基于<strong>竞价机制和精准定向</strong>，在线广告分化出了<strong>广告网络（ADN）</strong>这种形态，它批量地运营媒体的广告位资源，按照人群或者上下文标签卖给广告的需求方，并用竞价的方式决定流量分配。同时也出现了为需求方服务的产品<strong>交易终端（TD）</strong>，它可以面向多个ADN或者媒体按人群一站式的采买广告并优化ROI。</p>
 <p>　　然而，在ADN中，核心的竞价逻辑是封闭，它只提供出价的接口，这并不能满足需求方的利益要求。需求方需要定制化的人群定向，于是产生了一个开放的竞价逻辑，让需求方按照自己的人群定义来挑选流量，这个逻辑称为<strong>实时竞价（RTB）</strong>。它将拍卖的过程由广告主预先出价变为每次展示时实时出价，只要把广告展示的上下文以及访客的用户标识等信息传给需求方，需求方就可以完成符合自己要求的定制的人群选择和出价。在此基础上，出现了聚合大量媒体剩余流量并用实时竞价为流量变现的产品<strong>广告交易平台(ADX)</strong>。在需求方这一侧，则出现了<strong>需求方平台（DSP）</strong>，它通过实时竞价的方式按照定制化的人群购买广告。</p>
@@ -236,10 +236,10 @@
 <p><img src="http://o9pzffu9y.bkt.clouddn.com/computational-ad-basic-concepts-2.jpg" alt="ad products"></p>
 <p>（图2 在线广告产品进化示意图 来源于《计算广告》）</p>
 <p>　</p>
-<h2 id="在线广告结算方式比较"><a href="#在线广告结算方式比较" class="headerlink" title="在线广告结算方式比较"></a>在线广告结算方式比较</h2><p><img src="http://o9pzffu9y.bkt.clouddn.com/computational-ad-basic-concepts-3.jpg" alt="ad ways"></p>
+<h2><span id="在线广告结算方式比较">在线广告结算方式比较</span></h2><p><img src="http://o9pzffu9y.bkt.clouddn.com/computational-ad-basic-concepts-3.jpg" alt="ad ways"></p>
 <p>（图3 在线广告结算方式比较 来源于《计算广告》）</p>
 <p>图３列出了几种广告中常见的付费方式，并对它们的适用场景和优缺点都做了总结。</p>
-<h2 id="受众定向的方法"><a href="#受众定向的方法" class="headerlink" title="受众定向的方法"></a>受众定向的方法</h2><p>　　受众定向有一些典型的方法：</p>
+<h2><span id="受众定向的方法">受众定向的方法</span></h2><p>　　受众定向有一些典型的方法：</p>
 <ul>
 <li>地域定向。计算非常简单</li>
 <li>人口属性定向。包括年龄、性别、教育程度、收入水平等。与兴趣标签不同的是，它可以通过采样加调研的方式来判断一次定向中有多少比例是正确的，不过除非有专门的数据来源，例如SNS，一般情况下很难准确定向</li>
@@ -250,13 +250,13 @@
 <li>重定向。对广告主过去某一段时间的访客投放广告。被公认为精准程度最高、效果最突出的定向方式，不过人群覆盖量比较小。</li>
 <li>新客推荐定向。 根据广告主提供的种子用户信息，找到相似的潜在客户。</li>
 </ul>
-<h2 id="国内外广告市场结构"><a href="#国内外广告市场结构" class="headerlink" title="国内外广告市场结构"></a>国内外广告市场结构</h2><p>　　最后上两张广告市场结构的图，列出了在广告市场不同领域的杰出公司，一张是经典的LUMA的图，是总结国外广告市场的，另一张是RTBChina总结国内广告市场的图。广告市场变化很快，很多公司都会做多个领域的工作，所以图不一定准确。</p>
+<h2><span id="国内外广告市场结构">国内外广告市场结构</span></h2><p>　　最后上两张广告市场结构的图，列出了在广告市场不同领域的杰出公司，一张是经典的LUMA的图，是总结国外广告市场的，另一张是RTBChina总结国内广告市场的图。广告市场变化很快，很多公司都会做多个领域的工作，所以图不一定准确。</p>
 <p><img src="http://o9pzffu9y.bkt.clouddn.com/Display-LUMAscape_2012-04-05.jpg" alt="LUMA scape"></p>
 <p>（图4 国外广告市场 来源于LUMAscape）</p>
 <p><img src="http://o9pzffu9y.bkt.clouddn.com/China-Programmatic-Ad-Tech_201605_Release_V3.png" alt="RTBChina ad"></p>
 <p>(图5 国内广告市场 来源于RTBChina)</p>
 <p>　　广告市场纷繁复杂，看来我还要花大量时间去学习呀~</p>
-<h2 id="大数据问题的特性"><a href="#大数据问题的特性" class="headerlink" title="大数据问题的特性"></a>大数据问题的特性</h2><p>　　最后插一张刘鹏在书的开头谈到的关于大数据问题的图。<br><img src="http://o9pzffu9y.bkt.clouddn.com/computational-ad-basic-concepts-4.jpg" alt="big data"></p>
+<h2><span id="大数据问题的特性">大数据问题的特性</span></h2><p>　　最后插一张刘鹏在书的开头谈到的关于大数据问题的图。<br><img src="http://o9pzffu9y.bkt.clouddn.com/computational-ad-basic-concepts-4.jpg" alt="big data"></p>
 <p>（图6 大数据问题的特性 来源于《计算广告》）</p>
 <p>　　刘鹏把数据问题划分为3类：</p>
 <p>　　(1)C类问题。如果对数据进行采样后解决问题的效果（目标函数）没有太大的下降，那么这不算是大数据问题，完全可以通过较小的样本来求目标。</p>
@@ -280,6 +280,11 @@
                   <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
                   <div class="reward-box">
                     
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="my_pic/wechat-pay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
                     
                   </div>
                 </span>
@@ -404,7 +409,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#常见概念及缩写"><span class="toc-number">1.</span> <span class="toc-text">常见概念及缩写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#广告的定义"><span class="toc-number">2.</span> <span class="toc-text">广告的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#广告的有效性模型"><span class="toc-number">3.</span> <span class="toc-text">广告的有效性模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#计算广告的核心问题"><span class="toc-number">4.</span> <span class="toc-text">计算广告的核心问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在线广告简史"><span class="toc-number">5.</span> <span class="toc-text">在线广告简史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在线广告结算方式比较"><span class="toc-number">6.</span> <span class="toc-text">在线广告结算方式比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#受众定向的方法"><span class="toc-number">7.</span> <span class="toc-text">受众定向的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#国内外广告市场结构"><span class="toc-number">8.</span> <span class="toc-text">国内外广告市场结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#大数据问题的特性"><span class="toc-number">9.</span> <span class="toc-text">大数据问题的特性</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">常见概念及缩写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">广告的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">广告的有效性模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">计算广告的核心问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">在线广告简史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.</span> <span class="toc-text">在线广告结算方式比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">7.</span> <span class="toc-text">受众定向的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">8.</span> <span class="toc-text">国内外广告市场结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">9.</span> <span class="toc-text">大数据问题的特性</span></a></li></ol>
                     </div>
                 </span>
             </div>

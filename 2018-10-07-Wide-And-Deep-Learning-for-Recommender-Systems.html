@@ -181,39 +181,39 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>Wide &amp; Deep Learning for Recommender Systems 论文整理<br><a id="more"></a></p>
-<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>推荐是寻求query-item的匹配<br>做推荐和搜索需要解决两个问题：memorization and generalization.</p>
-<h4 id="Memorization"><a href="#Memorization" class="headerlink" title="Memorization"></a>Memorization</h4><blockquote>
+<h3><span id="背景">背景</span></h3><p>推荐是寻求query-item的匹配<br>做推荐和搜索需要解决两个问题：memorization and generalization.</p>
+<h4><span id="memorization">Memorization</span></h4><blockquote>
 <p>Memorization can be loosely defined as learning the frequent co-occurrence of items or features and exploiting the correlation available in the historical data</p>
 </blockquote>
 <p>记忆，需要利用历史数据取寻找item跟feature之前的关联关系，一般使用大规模的线性模型（例如LR）加上交叉特征来实现，它能够提升推荐的相关性。目前存在的一个问题是，它没法寻找到训练集中没有出现的query-item的关系</p>
-<h4 id="Generalization"><a href="#Generalization" class="headerlink" title="Generalization"></a>Generalization</h4><blockquote>
+<h4><span id="generalization">Generalization</span></h4><blockquote>
 <p>Generalization, on the other hand, is based on transitivity of correlation and explores new feature combinations thathave never or rarely occurred in the past</p>
 </blockquote>
 <p>泛化，能够探索到之前没有出现过的特征关系，它能够提升推荐的多样性。但是很难记住那些用户的细微偏好，并且当query-item的数据比较稀疏时，很难学到好的特征表示，推荐出的item相关性低。</p>
-<h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><p><img src="https://user-images.githubusercontent.com/7859870/46579512-12660f00-ca46-11e8-97ea-054260128fcc.png" alt="wide-deep-learning-for-recommender-systems_model"></p>
+<h3><span id="模型">模型</span></h3><p><img src="https://user-images.githubusercontent.com/7859870/46579512-12660f00-ca46-11e8-97ea-054260128fcc.png" alt="wide-deep-learning-for-recommender-systems_model"></p>
 <p>本文提出了一个Wide &amp; Deep的深度学习模型，把两者进行了结合，Wide解决Memorization问题，Deep解决Generalization问题，两者做joint traing，互相补充。</p>
-<h4 id="The-Wide-Component"><a href="#The-Wide-Component" class="headerlink" title="The Wide Component"></a>The Wide Component</h4><p>wide部分是线性模型 y = wx + b，输入的特征包括原始的特征以及特征组合，特征组合可以加入非线性的特征。</p>
-<h4 id="The-Deep-Component"><a href="#The-Deep-Component" class="headerlink" title="The Deep Component"></a>The Deep Component</h4><p>Deep部分是一个前馈神经网络，对于原始特征中的category feature，会先做embedding，一般是10~100维的向量。</p>
-<h4 id="Joint-Training-of-Wide-amp-Deep-Model"><a href="#Joint-Training-of-Wide-amp-Deep-Model" class="headerlink" title="Joint Training of Wide &amp; Deep Model"></a>Joint Training of Wide &amp; Deep Model</h4><p>wide和deep模型最后按加权方式结合，用一个sigmoid函数计算最后输出，表示y=1的概率，loss使用logistic loss<br><img src="https://user-images.githubusercontent.com/7859870/46579510-11cd7880-ca46-11e8-8793-ed7452f24a6e.png" alt="wide-deep-learning-for-recommender-systems_formula"></p>
+<h4><span id="the-wide-component">The Wide Component</span></h4><p>wide部分是线性模型 y = wx + b，输入的特征包括原始的特征以及特征组合，特征组合可以加入非线性的特征。</p>
+<h4><span id="the-deep-component">The Deep Component</span></h4><p>Deep部分是一个前馈神经网络，对于原始特征中的category feature，会先做embedding，一般是10~100维的向量。</p>
+<h4><span id="joint-training-of-wide-amp-deep-model">Joint Training of Wide &amp; Deep Model</span></h4><p>wide和deep模型最后按加权方式结合，用一个sigmoid函数计算最后输出，表示y=1的概率，loss使用logistic loss<br><img src="https://user-images.githubusercontent.com/7859870/46579510-11cd7880-ca46-11e8-8793-ed7452f24a6e.png" alt="wide-deep-learning-for-recommender-systems_formula"></p>
 <p>wide模型使用FTRL加L1正则来优化，deep模型使用AdaGrad来优化</p>
-<h5 id="Joint-Training跟ensemble的区别"><a href="#Joint-Training跟ensemble的区别" class="headerlink" title="Joint Training跟ensemble的区别:"></a>Joint Training跟ensemble的区别:</h5><blockquote>
+<h5><span id="joint-training跟ensemble的区别">Joint Training跟ensemble的区别:</span></h5><blockquote>
 <p>In an ensemble, indi-vidual models are <strong>trained separately without knowing each other</strong>, and their predictions are combined only at inference time but not at training time. In contrast, joint training <strong>optimizes all parameters simultaneously</strong> by taking both the wide and deep part as well as the weights of their sum into account at training time.</p>
 </blockquote>
 <p>在做ensemble的时候，每个单独的模型需要足够大（更多的特征和特征转换)，在做joint training的时候，wide part only needs to complement the weak- nesses of the deep part with a small number of cross-product feature transformations, rather than a full-size wide model.</p>
-<h3 id="系统实现"><a href="#系统实现" class="headerlink" title="系统实现"></a>系统实现</h3><p>整体流程<br><img src="https://user-images.githubusercontent.com/7859870/46579513-12660f00-ca46-11e8-9406-d41e3d679e00.png" alt="wide-deep-learning-for-recommender-systems_system"></p>
-<h4 id="数据生成"><a href="#数据生成" class="headerlink" title="数据生成"></a>数据生成</h4><ul>
+<h3><span id="系统实现">系统实现</span></h3><p>整体流程<br><img src="https://user-images.githubusercontent.com/7859870/46579513-12660f00-ca46-11e8-9406-d41e3d679e00.png" alt="wide-deep-learning-for-recommender-systems_system"></p>
+<h4><span id="数据生成">数据生成</span></h4><ul>
 <li>构建一个词表，将categorical特征映射为ID，需要用一个阈值过滤掉那些出现样本较少的特征</li>
 <li>对连续特征做归一化处理<br>1.把连续特征映射到它的累积分布函数P(X &lt;= x)中，归一化到[0, 1]<br>2.再划分成nq个桶（等频分桶？），落入第i个桶的值为 (i-1)/(nq-1) 做离散化</li>
 </ul>
-<h4 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h4><p>针对google app的模型<br><img src="https://user-images.githubusercontent.com/7859870/46579511-11cd7880-ca46-11e8-9335-dd47756fbb00.png" alt="wide-deep-learning-for-recommender-systems_model_app"></p>
-<h5 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h5><ul>
+<h4><span id="模型训练">模型训练</span></h4><p>针对google app的模型<br><img src="https://user-images.githubusercontent.com/7859870/46579511-11cd7880-ca46-11e8-9335-dd47756fbb00.png" alt="wide-deep-learning-for-recommender-systems_model_app"></p>
+<h5><span id="特征">特征</span></h5><ul>
 <li>wide部分使用app展现和安装的交叉特征</li>
 <li>deep部分，对于categorical特征，做32维的embedding，最后把continuous特征和embedding后的categoricalt特征合并起来，有约1200维，接3层全连接，激活函数用ReLU</li>
 </ul>
-<h5 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h5><ul>
+<h5><span id="训练">训练</span></h5><ul>
 <li>使用了5000亿的训练样本，每次来新数据后会重新训练模型。重新训的时候，会用之前模型的embedding和线性模型做初始化。</li>
 </ul>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>[1] Wide &amp; Deep Learning for Recommender Systems <a href="https://arxiv.org/abs/1606.07792" target="_blank" rel="noopener">https://arxiv.org/abs/1606.07792</a><br>[2] wide&amp;deep模型中为什么要将连续特征离散化 <a href="https://www.zhihu.com/question/264015592" target="_blank" rel="noopener">https://www.zhihu.com/question/264015592</a></p>
+<h3><span id="参考">参考</span></h3><p>[1] Wide &amp; Deep Learning for Recommender Systems <a href="https://arxiv.org/abs/1606.07792" target="_blank" rel="noopener">https://arxiv.org/abs/1606.07792</a><br>[2] wide&amp;deep模型中为什么要将连续特征离散化 <a href="https://www.zhihu.com/question/264015592" target="_blank" rel="noopener">https://www.zhihu.com/question/264015592</a></p>
 
       
 
@@ -230,6 +230,11 @@
                   <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
                   <div class="reward-box">
                     
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="my_pic/wechat-pay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
                     
                   </div>
                 </span>
@@ -329,7 +334,7 @@
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          (no title)
+          BP算法
         
       </div>
     </a>
@@ -363,7 +368,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Memorization"><span class="toc-number">1.1.</span> <span class="toc-text">Memorization</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Generalization"><span class="toc-number">1.2.</span> <span class="toc-text">Generalization</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模型"><span class="toc-number">2.</span> <span class="toc-text">模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#The-Wide-Component"><span class="toc-number">2.1.</span> <span class="toc-text">The Wide Component</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#The-Deep-Component"><span class="toc-number">2.2.</span> <span class="toc-text">The Deep Component</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Joint-Training-of-Wide-amp-Deep-Model"><span class="toc-number">2.3.</span> <span class="toc-text">Joint Training of Wide &amp; Deep Model</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Joint-Training跟ensemble的区别"><span class="toc-number">2.3.1.</span> <span class="toc-text">Joint Training跟ensemble的区别:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#系统实现"><span class="toc-number">3.</span> <span class="toc-text">系统实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数据生成"><span class="toc-number">3.1.</span> <span class="toc-text">数据生成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模型训练"><span class="toc-number">3.2.</span> <span class="toc-text">模型训练</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#特征"><span class="toc-number">3.2.1.</span> <span class="toc-text">特征</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#训练"><span class="toc-number">3.2.2.</span> <span class="toc-text">训练</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">4.</span> <span class="toc-text">参考</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">Memorization</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.</span> <span class="toc-text">Generalization</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">2.1.</span> <span class="toc-text">The Wide Component</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">2.2.</span> <span class="toc-text">The Deep Component</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">2.3.</span> <span class="toc-text">Joint Training of Wide &amp; Deep Model</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">2.3.1.</span> <span class="toc-text">Joint Training跟ensemble的区别:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">系统实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">3.1.</span> <span class="toc-text">数据生成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">3.2.</span> <span class="toc-text">模型训练</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">3.2.1.</span> <span class="toc-text">特征</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">3.2.2.</span> <span class="toc-text">训练</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">参考</span></a></li></ol>
                     </div>
                 </span>
             </div>

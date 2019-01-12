@@ -6,14 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://stupidjoey.net">
-  <title>stupidjoey&#39;s blog</title>
+  <title>BP算法 | stupidjoey&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、理论推导 背景 backpropagation B部分 A部分 整理起来     二、梯度消失\爆炸问题 三、代码   一、理论推导背景 一个多层神经网络的正向传播过程如图 给定一些符号 它们之间的计算关系如上图，z表示每个神经单元的输入，a表示经过激活函数计算后的值  在训练神经网络的时候，我们一般采用梯度下降的方式，对于网络中的每个参数，其更新的方式是loss function在这个参">
+  <meta name="description" content="BP算法理论推导以及梯度消失问题">
+<meta name="keywords" content="Deep Learning">
 <meta property="og:type" content="article">
-<meta property="og:title" content="stupidjoey&#39;s blog">
+<meta property="og:title" content="BP算法">
 <meta property="og:url" content="http://stupidjoey.net/2019-01-12-backpropagation.html">
 <meta property="og:site_name" content="stupidjoey&#39;s blog">
-<meta property="og:description" content="一、理论推导 背景 backpropagation B部分 A部分 整理起来     二、梯度消失\爆炸问题 三、代码   一、理论推导背景 一个多层神经网络的正向传播过程如图 给定一些符号 它们之间的计算关系如上图，z表示每个神经单元的输入，a表示经过激活函数计算后的值  在训练神经网络的时候，我们一般采用梯度下降的方式，对于网络中的每个参数，其更新的方式是loss function在这个参">
+<meta property="og:description" content="BP算法理论推导以及梯度消失问题">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51071766-6c075680-1691-11e9-87e4-b62c24616276.png">
 <meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51071801-e6d07180-1691-11e9-9549-d8d814c9d702.png">
@@ -34,10 +35,10 @@
 <meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51072255-b50ed900-1698-11e9-9543-990563be548e.png">
 <meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51072248-a0cadc00-1698-11e9-9ff7-61a8aaa55084.png">
 <meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51072366-9b6e9100-169a-11e9-8a1f-624ff412fa54.jpg">
-<meta property="og:updated_time" content="2019-01-12T10:57:52.502Z">
+<meta property="og:updated_time" content="2019-01-12T11:01:23.009Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="stupidjoey&#39;s blog">
-<meta name="twitter:description" content="一、理论推导 背景 backpropagation B部分 A部分 整理起来     二、梯度消失\爆炸问题 三、代码   一、理论推导背景 一个多层神经网络的正向传播过程如图 给定一些符号 它们之间的计算关系如上图，z表示每个神经单元的输入，a表示经过激活函数计算后的值  在训练神经网络的时候，我们一般采用梯度下降的方式，对于网络中的每个参数，其更新的方式是loss function在这个参">
+<meta name="twitter:title" content="BP算法">
+<meta name="twitter:description" content="BP算法理论推导以及梯度消失问题">
 <meta name="twitter:image" content="https://user-images.githubusercontent.com/7859870/51071766-6c075680-1691-11e9-87e4-b62c24616276.png">
   
     <link rel="alternative" href="/atom.xml" title="stupidjoey&#39;s blog" type="application/atom+xml">
@@ -177,9 +178,25 @@
             <article id="post-backpropagation" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      BP算法
+    </h1>
+  
+
+        
+        <a href="/2019-01-12-backpropagation.html" class="archive-article-date">
+  	<time datetime="2019-01-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-12</time>
+</a>
+        
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <!-- toc -->
+        <p>BP算法理论推导以及梯度消失问题<br><a id="more"></a></p>
+<!-- toc -->
 <ul>
 <li><a href="#一-理论推导">一、理论推导</a><ul>
 <li><a href="#背景">背景</a></li>
@@ -241,6 +258,11 @@
                   <div class="reward-box">
                     
                     
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="my_pic/wechat-pay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
                   </div>
                 </span>
               </span>
@@ -253,6 +275,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       <span id="busuanzi_container_page_pv">
         | 阅读量(<span id="busuanzi_value_page_pv"></span>)
       </span>
@@ -384,7 +417,7 @@ if(true){
     repo: 'comment_for_blog',
     owner: 'stupidjoey',
     admin: ['stupidjoey'],
-    id: 'Sat Jan 12 2019 18:57:52 GMT+0800',
+    id: 'Sat Jan 12 2019 00:00:00 GMT+0800',
     distractionFreeMode: 'true'
 })
 gitalk.render('gitalk-container') 
