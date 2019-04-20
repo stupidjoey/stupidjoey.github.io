@@ -6,40 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://stupidjoey.net">
-  <title>BP算法 | stupidjoey&#39;s blog</title>
+  <title>主流ctr预估模型梳理 | stupidjoey&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="BP算法理论推导以及梯度消失问题">
-<meta name="keywords" content="Deep Learning">
+  <meta name="description" content="对当前ctr预估模型做一下总结和整理">
+<meta name="keywords" content="Deep Learning,ctr">
 <meta property="og:type" content="article">
-<meta property="og:title" content="BP算法">
-<meta property="og:url" content="http://stupidjoey.net/2019-01-12-backpropagation.html">
+<meta property="og:title" content="主流ctr预估模型梳理">
+<meta property="og:url" content="http://stupidjoey.net/2019-04-20-ctr_prediction_model_summary.html">
 <meta property="og:site_name" content="stupidjoey&#39;s blog">
-<meta property="og:description" content="BP算法理论推导以及梯度消失问题">
+<meta property="og:description" content="对当前ctr预估模型做一下总结和整理">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51071766-6c075680-1691-11e9-87e4-b62c24616276.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51071801-e6d07180-1691-11e9-9549-d8d814c9d702.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51071812-14b5b600-1692-11e9-84b9-53c9e1ec5d4f.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51071818-2ac37680-1692-11e9-8440-db2fa3627fff.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51071840-770eb680-1692-11e9-9e24-f9780685ba87.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51071890-60b52a80-1693-11e9-8d89-c37cbc87fb5e.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51071932-0ec0d480-1694-11e9-98e6-2645dd254cde.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51071951-547d9d00-1694-11e9-8e66-4d70420cb8cc.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51071953-5b0c1480-1694-11e9-8255-1163c7ca9190.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51071956-6101f580-1694-11e9-966c-9334035c7ee1.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51072134-b4754300-1696-11e9-9e07-3b5571cea36e.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51072152-fd2cfc00-1696-11e9-8eaa-eaccf8b9da35.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51072162-35343f00-1697-11e9-9af5-034c6f01a63b.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51072195-cb686500-1697-11e9-8ca3-208924b18ace.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51072187-a07e1100-1697-11e9-8619-b37ea3d47d81.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51072236-724d0100-1698-11e9-9981-d02285f87db6.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51072255-b50ed900-1698-11e9-9543-990563be548e.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51072248-a0cadc00-1698-11e9-9ff7-61a8aaa55084.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/56458808-c6653100-63bd-11e9-9761-2d8f645766b9.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/56458834-0e845380-63be-11e9-95f9-d7cc7df73162.png">
 <meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51072366-9b6e9100-169a-11e9-8a1f-624ff412fa54.jpg">
-<meta property="og:updated_time" content="2019-01-12T11:16:26.874Z">
+<meta property="og:updated_time" content="2019-04-20T14:51:57.480Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="BP算法">
-<meta name="twitter:description" content="BP算法理论推导以及梯度消失问题">
-<meta name="twitter:image" content="https://user-images.githubusercontent.com/7859870/51071766-6c075680-1691-11e9-87e4-b62c24616276.png">
+<meta name="twitter:title" content="主流ctr预估模型梳理">
+<meta name="twitter:description" content="对当前ctr预估模型做一下总结和整理">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/7859870/56458808-c6653100-63bd-11e9-9761-2d8f645766b9.png">
   
     <link rel="alternative" href="/atom.xml" title="stupidjoey&#39;s blog" type="application/atom+xml">
   
@@ -175,54 +159,44 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-backpropagation" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-ctr_prediction_model_summary" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      BP算法
+      主流ctr预估模型梳理
     </h1>
   
 
         
-        <a href="/2019-01-12-backpropagation.html" class="archive-article-date">
-  	<time datetime="2019-01-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-12</time>
+        <a href="/2019-04-20-ctr_prediction_model_summary.html" class="archive-article-date">
+  	<time datetime="2019-04-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>BP算法理论推导以及梯度消失问题<br><a id="more"></a></p>
-<h3><span id="一-理论推导">一、理论推导</span></h3><h4><span id="背景">背景</span></h4><p><img src="https://user-images.githubusercontent.com/7859870/51071766-6c075680-1691-11e9-87e4-b62c24616276.png" alt="image"></p>
-<p>一个多层神经网络的正向传播过程如图<br><img src="https://user-images.githubusercontent.com/7859870/51071801-e6d07180-1691-11e9-9549-d8d814c9d702.png" alt="image"></p>
-<p>给定一些符号<br><img src="https://user-images.githubusercontent.com/7859870/51071812-14b5b600-1692-11e9-84b9-53c9e1ec5d4f.png" alt="image"><br><img src="https://user-images.githubusercontent.com/7859870/51071818-2ac37680-1692-11e9-8440-db2fa3627fff.png" alt="image"></p>
-<p>它们之间的计算关系如上图，z表示每个神经单元的输入，a表示经过激活函数计算后的值</p>
-<p><img src="https://user-images.githubusercontent.com/7859870/51071840-770eb680-1692-11e9-9e24-f9780685ba87.png" alt="image"></p>
-<p>在训练神经网络的时候，我们一般采用梯度下降的方式，对于网络中的每个参数，其更新的方式是loss function在这个参数的负梯度方向，因此我们需要用loss function对每个参数求梯度。在网络很深且神经单元很多的时，计算量很大。较为高效的方式是通过back propagation来求，它从最后一层开始计算，前面的层会复用后面层已经计算好的值，减少计算量。</p>
-<h4><span id="backpropagation">backpropagation</span></h4><p><img src="https://user-images.githubusercontent.com/7859870/51071890-60b52a80-1693-11e9-8d89-c37cbc87fb5e.png" alt="image"></p>
-<p>BP算法的基础是链式法则</p>
-<p><img src="https://user-images.githubusercontent.com/7859870/51071932-0ec0d480-1694-11e9-98e6-2645dd254cde.png" alt="image"></p>
-<p>当我们求loss func对某一个参数的偏导数时，可以把它拆分成A和B两个部分。先看B部分</p>
-<h5><span id="b部分">B部分</span></h5><p><img src="https://user-images.githubusercontent.com/7859870/51071951-547d9d00-1694-11e9-8e66-4d70420cb8cc.png" alt="image"><br><img src="https://user-images.githubusercontent.com/7859870/51071953-5b0c1480-1694-11e9-8255-1163c7ca9190.png" alt="image"><br><img src="https://user-images.githubusercontent.com/7859870/51071956-6101f580-1694-11e9-966c-9334035c7ee1.png" alt="image"></p>
-<p>B部分的计算比较简单。</p>
-<h5><span id="a部分">A部分</span></h5><p><img src="https://user-images.githubusercontent.com/7859870/51072134-b4754300-1696-11e9-9e07-3b5571cea36e.png" alt="image"></p>
-<p>A部分的计算相对麻烦一点，我们先将符号简化一下，从后往前计算这个偏导，前面的会复用后面已经算好的值</p>
-<p><img src="https://user-images.githubusercontent.com/7859870/51072152-fd2cfc00-1696-11e9-8eaa-eaccf8b9da35.png" alt="image"></p>
-<p>最后一层的计算方式如图，具体情况要看激活函数的选择以及loss func的选择</p>
-<p><img src="https://user-images.githubusercontent.com/7859870/51072162-35343f00-1697-11e9-9af5-034c6f01a63b.png" alt="image"></p>
-<p>可以推导出前面一层的值跟后面一层的值的关系<br><img src="https://user-images.githubusercontent.com/7859870/51072195-cb686500-1697-11e9-8ca3-208924b18ace.png" alt="image"></p>
-<p>最后可以得到这种形式<br><img src="https://user-images.githubusercontent.com/7859870/51072187-a07e1100-1697-11e9-8619-b37ea3d47d81.png" alt="image"></p>
-<p>反过来看，前面一层的偏导等于后面一层的偏导乘以权重的加和再乘以激活函数的偏导，有一种反向传播的意思。<br><img src="https://user-images.githubusercontent.com/7859870/51072236-724d0100-1698-11e9-9981-d02285f87db6.png" alt="image"></p>
-<p>层与层之间整理成如图的形式<br><img src="https://user-images.githubusercontent.com/7859870/51072255-b50ed900-1698-11e9-9543-990563be548e.png" alt="image"></p>
-<h5><span id="整理起来">整理起来</span></h5><p><img src="https://user-images.githubusercontent.com/7859870/51072248-a0cadc00-1698-11e9-9ff7-61a8aaa55084.png" alt="image"></p>
-<p>BP算法其实包含了两个过程，在forward的过程中，把需要计算的z和a的值都计算好了；在backword的过程中，从后往前计算偏导。</p>
-<h3><span id="二-梯度消失爆炸问题">二、梯度消失\爆炸问题</span></h3><p>如果参数初始化不当，或者选择的激活函数有问题（如sigmoid），大概率会出现 梯度消失or梯度爆炸的问题</p>
-<p>可以参考<br><a href="https://blog.csdn.net/baidu_29782299/article/details/52742773" target="_blank" rel="noopener">https://blog.csdn.net/baidu_29782299/article/details/52742773</a><br><a href="https://www.zhihu.com/question/49812013" target="_blank" rel="noopener">https://www.zhihu.com/question/49812013</a></p>
-<h3><span id="三-代码">三、代码</span></h3><p>to do…</p>
-<p>reference<br>[1] <a href="https://www.csie.ntu.edu.tw/~yvchen/f106-adl/doc/170925+170928_BackProp.pdf" target="_blank" rel="noopener">https://www.csie.ntu.edu.tw/~yvchen/f106-adl/doc/170925+170928_BackProp.pdf</a></p>
+        <p>对当前ctr预估模型做一下总结和整理<br><a id="more"></a></p>
+<h3><span id="一-前言">一、前言</span></h3><p>ctr预估在广告业务、推荐系统中都扮演着很重要的作用，参考之前王喆对于ctr预估模型的梳理，自己在这里做一下备份</p>
+<p>整体可以划分为前深度学习时代模型</p>
+<p><img src="https://user-images.githubusercontent.com/7859870/56458808-c6653100-63bd-11e9-9761-2d8f645766b9.png" alt="1"><br><br></p>
+<p>深度学习时代模型<br><img src="https://user-images.githubusercontent.com/7859870/56458834-0e845380-63be-11e9-95f9-d7cc7df73162.png" alt="2"></p>
+<h3><span id="二-模型梳理">二、模型梳理</span></h3><ul>
+<li>LR</li>
+<li>GBDT + LR</li>
+<li>FM、FFM</li>
+<li>MLR</li>
+<li>WDL (WIDE &amp; DEEP)</li>
+<li>DeepFM</li>
+<li>DIN</li>
+<li>Deep Crossing</li>
+<li>DCN</li>
+<li>xDeepFM</li>
+</ul>
+<p>reference<br>[1] <a href="https://www.infoq.cn/article/Q8Cv-4vq6jD8974w9MxJ" target="_blank" rel="noopener">https://www.infoq.cn/article/Q8Cv-4vq6jD8974w9MxJ</a> 盘点前深度学习时代阿里、谷歌、Facebook 的 CTR 预估模型<br>[2] <a href="https://www.infoq.cn/article/TySwhPNlckijh8Q_vdyO" target="_blank" rel="noopener">https://www.infoq.cn/article/TySwhPNlckijh8Q_vdyO</a>   谷歌、阿里等 10 大深度学习 CTR 模型最全演化图谱</p>
 <hr>
 <p><img src="https://user-images.githubusercontent.com/7859870/51072366-9b6e9100-169a-11e9-8a1f-624ff412fa54.jpg" alt="38db85a4c595ca6"></p>
 
@@ -265,6 +239,10 @@
 			 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ctr</a>
         		</li>
       		
 		</ul>
@@ -323,7 +301,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://stupidjoey.net/2019-01-12-backpropagation.html" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://stupidjoey.net/2019-04-20-ctr_prediction_model_summary.html" alt="微信分享二维码">
     </div>
 </div>
 
@@ -337,18 +315,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019-04-20-ctr_prediction_model_summary.html" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          主流ctr预估模型梳理
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018-10-07-Wide-And-Deep-Learning-for-Recommender-Systems.html" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Wide &amp; Deep Learning for Recommender Systems</div>
+    <a href="/2019-01-12-backpropagation.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">BP算法</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -375,7 +344,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">一、理论推导</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.</span> <span class="toc-text">backpropagation</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.1.</span> <span class="toc-text">B部分</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.2.</span> <span class="toc-text">A部分</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.3.</span> <span class="toc-text">整理起来</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">二、梯度消失\爆炸问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">三、代码</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">一、前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">二、模型梳理</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -410,7 +379,7 @@ if(true){
     repo: 'comment_for_blog',
     owner: 'stupidjoey',
     admin: ['stupidjoey'],
-    id: 'Sat Jan 12 2019 00:00:00 GMT+0800',
+    id: 'Sat Apr 20 2019 00:00:00 GMT+0800',
     distractionFreeMode: 'true'
 })
 gitalk.render('gitalk-container') 
