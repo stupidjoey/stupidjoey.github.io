@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://user-images.githubusercontent.com/7859870/56506620-a9f9fd80-6551-11e9-891d-438c22348875.png">
 <meta property="og:image" content="https://user-images.githubusercontent.com/7859870/56507164-0f022300-6553-11e9-88df-4ebf7ee43785.png">
 <meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51072366-9b6e9100-169a-11e9-8a1f-624ff412fa54.jpg">
-<meta property="og:updated_time" content="2019-04-22T15:19:13.540Z">
+<meta property="og:updated_time" content="2019-04-22T15:53:19.336Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FM&#x2F;FFM模型学习笔记">
 <meta name="twitter:description" content="对fm和ffm做一下总结和整理">
@@ -185,12 +185,13 @@
       
         <p>对fm和ffm做一下总结和整理<br><a id="more"></a></p>
 <h3><span id="一-前言">一、前言</span></h3><p>fm和ffm模型</p>
-<h3><span id="二-fm模型factorization-machines">二、FM模型(Factorization Machines)</span></h3><h4><span id="model">model</span></h4><p><img src="https://user-images.githubusercontent.com/7859870/56505627-b4ff5e80-654e-11e9-84c0-0e3df310a0a7.png" alt="image"><br>2阶的FM模型如图所示，Vi跟Vj的点乘用来刻画特征i和特征j之间的组合性质。对于正定矩阵W（两两特征之间的权重wij组成的矩阵），存在一个矩阵V，使得W=V·VT。</p>
+<h3><span id="二-fm模型factorization-machines">二、FM模型(Factorization Machines)</span></h3><h4><span id="background">background</span></h4><p>LR模型需要人工设计组合特征来引入非线性，FM模型能够自动对特征进行组合，提升模型泛化能力。</p>
+<h4><span id="model">model</span></h4><p><img src="https://user-images.githubusercontent.com/7859870/56505627-b4ff5e80-654e-11e9-84c0-0e3df310a0a7.png" alt="image"><br>2阶的FM模型如图所示，Vi跟Vj的点乘用来刻画特征i和特征j之间的组合性质。对于正定矩阵W（两两特征之间的权重wij组成的矩阵），存在一个矩阵V，使得W=V·VT。</p>
 <h4><span id="预估计算复杂度">预估计算复杂度</span></h4><p><img src="https://user-images.githubusercontent.com/7859870/56506301-9ef29d80-6550-11e9-80e6-a558f249922d.png" alt="image"><br>根据公式1，计算复杂度为O(kn2)，通过如图化简，复杂度可以降为O(kn)</p>
 <h4><span id="学习算法">学习算法</span></h4><p><img src="https://user-images.githubusercontent.com/7859870/56506427-0dcff680-6551-11e9-9cad-e92f24b7a51e.png" alt="image"><br>FM每个参数的梯度可以在O(1)的时间内计算出来，一共有kn个参数，所以一次参数更新时间复杂度为O(kn)。由于n大部分值稀疏（即为0），因此实际复杂度更低为 O(km(x))，m(x)表示样本x中非0的特征数。</p>
 <h4><span id="高阶fm">高阶FM</span></h4><p><img src="https://user-images.githubusercontent.com/7859870/56506600-9ea6d200-6551-11e9-8f57-b9c218c7af45.png" alt="image"><br><img src="https://user-images.githubusercontent.com/7859870/56506620-a9f9fd80-6551-11e9-891d-438c22348875.png" alt="image"><br>通过化简，高阶FM也可以再线性时间做预测</p>
-<h3><span id="三-ffm模型field-aware-factorization-machines">三、FFM模型(Field-aware Factorization Machines)</span></h3><h4><span id="model">model</span></h4><p><img src="https://user-images.githubusercontent.com/7859870/56507164-0f022300-6553-11e9-88df-4ebf7ee43785.png" alt="image"></p>
-<p>FFM模型，在FM的基础上引入了field的概念，作者认为features can be grouped into “fields”。每一个特征属于一个field，对属于不同field的其他特征有不同的权重。<br>另外FFM里面的k（特征向量长度）通常设置的要比FM小一点。</p>
+<h3><span id="三-ffm模型field-aware-factorization-machines">三、FFM模型(Field-aware Factorization Machines)</span></h3><h4><span id="background">background</span></h4><p>FFM模型，在FM的基础上引入了field的概念，作者认为features can be grouped into “fields”。每一个特征属于一个field，对属于不同field的其他特征有不同的权重。这样能够更好的捕捉特征之间的关系</p>
+<h4><span id="model">model</span></h4><p><img src="https://user-images.githubusercontent.com/7859870/56507164-0f022300-6553-11e9-88df-4ebf7ee43785.png" alt="image"><br>模型如图所示，另外FFM里面的k（特征向量长度）通常设置的要比FM小一点。</p>
 <h4><span id="训练优化">训练优化</span></h4><p>开发了libffm，使用了Hog-wild!算法</p>
 <h3><span id="四-开源工具">四、开源工具</span></h3><ul>
 <li>libfm</li>
@@ -341,7 +342,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">一、前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">二、FM模型(Factorization Machines)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">2.1.</span> <span class="toc-text">model</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">2.2.</span> <span class="toc-text">预估计算复杂度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">2.3.</span> <span class="toc-text">学习算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">2.4.</span> <span class="toc-text">高阶FM</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">三、FFM模型(Field-aware Factorization Machines)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">3.1.</span> <span class="toc-text">model</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">3.2.</span> <span class="toc-text">训练优化</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">四、开源工具</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">一、前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">二、FM模型(Factorization Machines)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">2.1.</span> <span class="toc-text">background</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">2.2.</span> <span class="toc-text">model</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">2.3.</span> <span class="toc-text">预估计算复杂度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">2.4.</span> <span class="toc-text">学习算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">2.5.</span> <span class="toc-text">高阶FM</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">三、FFM模型(Field-aware Factorization Machines)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">3.1.</span> <span class="toc-text">background</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">3.2.</span> <span class="toc-text">model</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">3.3.</span> <span class="toc-text">训练优化</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">四、开源工具</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -507,15 +508,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ctr</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Deep Learning</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">RecSys</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ctr</a>
               </li>
              
               <li class="article-tag-list-item">
