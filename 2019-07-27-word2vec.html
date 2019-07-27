@@ -50,10 +50,10 @@
 <meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992609-39ec9d80-b093-11e9-9ccf-c75b6c1dd337.png">
 <meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992767-fdba3c80-b094-11e9-8218-7a15c01ffdda.png">
 <meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992771-04e14a80-b095-11e9-9b54-88be2319db41.png">
-<meta property="og:image" content="evernotecid://B3DA1BC7-B5D5-4D63-9286-7F1A496ED593/appyinxiangcom/1636532/ENResource/p2793">
+<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992885-afa63880-b096-11e9-90e0-85a035d3e835.png">
 <meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992792-496ce600-b095-11e9-95d2-a89d9be49cfd.png">
 <meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51072366-9b6e9100-169a-11e9-8a1f-624ff412fa54.jpg">
-<meta property="og:updated_time" content="2019-07-27T09:45:14.738Z">
+<meta property="og:updated_time" content="2019-07-27T09:48:38.911Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="word2vec简解">
 <meta name="twitter:description" content="对word2vec做一下总结，便于自己快速复习相关概念">
@@ -238,7 +238,7 @@
 <p><img src="https://user-images.githubusercontent.com/7859870/61992542-5e944580-b092-11e9-8c9f-fe955e084b4a.png" alt="image"><br><img src="https://user-images.githubusercontent.com/7859870/61992554-7ff53180-b092-11e9-931c-13b23e114012.png" alt="image"><br>将左右的情况抽象化，ch 函数表示是n的左节点，那么output 的概率可以表示为<br><img src="https://user-images.githubusercontent.com/7859870/61992587-fbef7980-b092-11e9-9782-f6631b53235f.png" alt="image"></p>
 <p><img src="https://user-images.githubusercontent.com/7859870/61992601-2b9e8180-b093-11e9-9279-26d2ac9db065.png" alt="image"><br>loss func<br><img src="https://user-images.githubusercontent.com/7859870/61992609-39ec9d80-b093-11e9-9ccf-c75b6c1dd337.png" alt="image"></p>
 <p>那么在hidden -&gt; output层，我一共只需要更新 L(w)个vector，L(w)近似于log(V)，实际需要更新的向量只有log(v)个，这个计算量级大大减少了<br><img src="https://user-images.githubusercontent.com/7859870/61992767-fdba3c80-b094-11e9-8218-7a15c01ffdda.png" alt="image"><br><img src="https://user-images.githubusercontent.com/7859870/61992771-04e14a80-b095-11e9-9b54-88be2319db41.png" alt="image"></p>
-<p>input-&gt;output这样更新<br><img src="evernotecid://B3DA1BC7-B5D5-4D63-9286-7F1A496ED593/appyinxiangcom/1636532/ENResource/p2793" alt="fe815b70009eda69911390c9557ea663.png"></p>
+<p>input-&gt;output这样更新<br><img src="https://user-images.githubusercontent.com/7859870/61992885-afa63880-b096-11e9-90e0-85a035d3e835.png" alt="image"></p>
 <h5><span id="negative-sampling">Negative Sampling</span></h5><p><img src="https://user-images.githubusercontent.com/7859870/61992792-496ce600-b095-11e9-95d2-a89d9be49cfd.png" alt="image"></p>
 <p>只采样部分负例进行更新</p>
 <h5><span id="reference">Reference</span></h5><p>[1] <a href="http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/" target="_blank" rel="noopener">http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/</a><br>[2] <a href="http://mccormickml.com/2017/01/11/word2vec-tutorial-part-2-negative-sampling/" target="_blank" rel="noopener">http://mccormickml.com/2017/01/11/word2vec-tutorial-part-2-negative-sampling/</a><br>[3] word2vec Parameter Learning Explained <a href="https://arxiv.org/abs/1411.2738" target="_blank" rel="noopener">https://arxiv.org/abs/1411.2738</a> Xin Rong </p>
