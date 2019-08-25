@@ -6,28 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://stupidjoey.net">
-  <title>FM/FFM模型学习笔记 | stupidjoey&#39;s blog</title>
+  <title>2019.8.19-8.25 慢慢喜欢你 | stupidjoey&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="对fm和ffm做一下总结和整理">
-<meta name="keywords" content="ctr">
+  <meta name="description" content="天气变得越来越凉爽，晚上出去散步应该算是非常惬意的一件事了，我也慢慢意识到夏天悄悄过去了。">
+<meta name="keywords" content="夏夜迷语">
 <meta property="og:type" content="article">
-<meta property="og:title" content="FM&#x2F;FFM模型学习笔记">
-<meta property="og:url" content="http://stupidjoey.net/2019-04-22-fm_and_ffm_model.html">
+<meta property="og:title" content="2019.8.19-8.25 慢慢喜欢你">
+<meta property="og:url" content="http://stupidjoey.net/2019-08-25-weekly_2019_8_19_8_15.html">
 <meta property="og:site_name" content="stupidjoey&#39;s blog">
-<meta property="og:description" content="对fm和ffm做一下总结和整理">
+<meta property="og:description" content="天气变得越来越凉爽，晚上出去散步应该算是非常惬意的一件事了，我也慢慢意识到夏天悄悄过去了。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/56505627-b4ff5e80-654e-11e9-84c0-0e3df310a0a7.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/56506301-9ef29d80-6550-11e9-80e6-a558f249922d.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/56506427-0dcff680-6551-11e9-9cad-e92f24b7a51e.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/56506600-9ea6d200-6551-11e9-8f57-b9c218c7af45.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/56506620-a9f9fd80-6551-11e9-891d-438c22348875.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/56507164-0f022300-6553-11e9-88df-4ebf7ee43785.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51072366-9b6e9100-169a-11e9-8a1f-624ff412fa54.jpg">
-<meta property="og:updated_time" content="2019-04-22T15:53:19.336Z">
+<meta property="og:updated_time" content="2019-08-25T12:50:18.981Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FM&#x2F;FFM模型学习笔记">
-<meta name="twitter:description" content="对fm和ffm做一下总结和整理">
-<meta name="twitter:image" content="https://user-images.githubusercontent.com/7859870/56505627-b4ff5e80-654e-11e9-84c0-0e3df310a0a7.png">
+<meta name="twitter:title" content="2019.8.19-8.25 慢慢喜欢你">
+<meta name="twitter:description" content="天气变得越来越凉爽，晚上出去散步应该算是非常惬意的一件事了，我也慢慢意识到夏天悄悄过去了。">
   
     <link rel="alternative" href="/atom.xml" title="stupidjoey&#39;s blog" type="application/atom+xml">
   
@@ -163,44 +155,27 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-fm_and_ffm_model" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-weekly_2019_8_19_8_15" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      FM/FFM模型学习笔记
+      2019.8.19-8.25 慢慢喜欢你
     </h1>
   
 
         
-        <a href="/2019-04-22-fm_and_ffm_model.html" class="archive-article-date">
-  	<time datetime="2019-04-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-22</time>
+        <a href="/2019-08-25-weekly_2019_8_19_8_15.html" class="archive-article-date">
+  	<time datetime="2019-08-24T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>对fm和ffm做一下总结和整理<br><a id="more"></a></p>
-<h3><span id="一-前言">一、前言</span></h3><p>fm和ffm模型</p>
-<h3><span id="二-fm模型factorization-machines">二、FM模型(Factorization Machines)</span></h3><h4><span id="background">background</span></h4><p>LR模型需要人工设计组合特征来引入非线性，FM模型能够自动对特征进行组合，提升模型泛化能力。</p>
-<h4><span id="model">model</span></h4><p><img src="https://user-images.githubusercontent.com/7859870/56505627-b4ff5e80-654e-11e9-84c0-0e3df310a0a7.png" alt="image"><br>2阶的FM模型如图所示，Vi跟Vj的点乘用来刻画特征i和特征j之间的组合性质。对于正定矩阵W（两两特征之间的权重wij组成的矩阵），存在一个矩阵V，使得W=V·VT。</p>
-<h4><span id="预估计算复杂度">预估计算复杂度</span></h4><p><img src="https://user-images.githubusercontent.com/7859870/56506301-9ef29d80-6550-11e9-80e6-a558f249922d.png" alt="image"><br>根据公式1，计算复杂度为O(kn2)，通过如图化简，复杂度可以降为O(kn)</p>
-<h4><span id="学习算法">学习算法</span></h4><p><img src="https://user-images.githubusercontent.com/7859870/56506427-0dcff680-6551-11e9-9cad-e92f24b7a51e.png" alt="image"><br>FM每个参数的梯度可以在O(1)的时间内计算出来，一共有kn个参数，所以一次参数更新时间复杂度为O(kn)。由于n大部分值稀疏（即为0），因此实际复杂度更低为 O(km(x))，m(x)表示样本x中非0的特征数。</p>
-<h4><span id="高阶fm">高阶FM</span></h4><p><img src="https://user-images.githubusercontent.com/7859870/56506600-9ea6d200-6551-11e9-8f57-b9c218c7af45.png" alt="image"><br><img src="https://user-images.githubusercontent.com/7859870/56506620-a9f9fd80-6551-11e9-891d-438c22348875.png" alt="image"><br>通过化简，高阶FM也可以再线性时间做预测</p>
-<h3><span id="三-ffm模型field-aware-factorization-machines">三、FFM模型(Field-aware Factorization Machines)</span></h3><h4><span id="background">background</span></h4><p>FFM模型，在FM的基础上引入了field的概念，作者认为features can be grouped into “fields”。每一个特征属于一个field，对属于不同field的其他特征有不同的权重。这样能够更好的捕捉特征之间的关系</p>
-<h4><span id="model">model</span></h4><p><img src="https://user-images.githubusercontent.com/7859870/56507164-0f022300-6553-11e9-88df-4ebf7ee43785.png" alt="image"><br>模型如图所示，另外FFM里面的k（特征向量长度）通常设置的要比FM小一点。</p>
-<h4><span id="训练优化">训练优化</span></h4><p>开发了libffm，使用了Hog-wild!算法</p>
-<h3><span id="四-开源工具">四、开源工具</span></h3><ul>
-<li>libfm</li>
-<li>libffm</li>
-<li>xlearn </li>
-</ul>
-<p>reference<br>[1] FM <a href="https://www.csie.ntu.edu.tw/~b97053/paper/Rendle2010FM.pdf" target="_blank" rel="noopener">https://www.csie.ntu.edu.tw/~b97053/paper/Rendle2010FM.pdf</a><br>[2] FFM <a href="https://www.csie.ntu.edu.tw/~cjlin/papers/ffm.pdf" target="_blank" rel="noopener">https://www.csie.ntu.edu.tw/~cjlin/papers/ffm.pdf</a><br>[3] 深入FFM原理与实践 <a href="https://tech.meituan.com/2016/03/03/deep-understanding-of-ffm-principles-and-practices.html" target="_blank" rel="noopener">https://tech.meituan.com/2016/03/03/deep-understanding-of-ffm-principles-and-practices.html</a></p>
-<hr>
-<p><img src="https://user-images.githubusercontent.com/7859870/51072366-9b6e9100-169a-11e9-8a1f-624ff412fa54.jpg" alt="38db85a4c595ca6"></p>
+        <p>天气变得越来越凉爽，晚上出去散步应该算是非常惬意的一件事了，我也慢慢意识到夏天悄悄过去了。<br><a id="more"></a><br>　　这周六加班，周日也得处理一些事情，把我搞的非常疲惫，只有周日晚上出去散了散步。周六其实晚上10点就回家了，但自己趟在床上刷手机刷到了凌晨2点多，算是对加班的一种反抗吧。其实这种反抗之前重复过无数次，我也明白这毫无意义。加班加的身体越来越疲劳，加上自己又不愿好好休息，导致精神状态在周日崩溃了。我始终觉得自己的日子过得不顺心，工作上没进展，周末生活也缺乏计划，经常宅在家趟2天。<br>　　我似乎有一些兴趣爱好，常逛的网站有好几个，手机上app也装了好多，无聊的时候就一直刷刷刷。但说实话，我真的需要这些信息吗？我真的需要把时间都花在这些事情上面吗？我的人生真的要变得这样琐碎吗？<br>　　最近常常的反思自己过得开心吗？ 现在觉得并不那么开心，做事情都非常急躁，常常希望在某些事情上突飞猛进，然后好去做下一件事，生活也失去了情趣。我可能确实需要一种极简的生活，只关注自己关注的，其他的事情都先扔在一边。慢慢的去培养一个兴趣爱好，把大块大块的时间花在这种自己喜欢的事情上去。<br>　　慢慢先喜欢上自己。</p>
 
       
 
@@ -240,7 +215,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ctr</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">夏夜迷语</a>
         		</li>
       		
 		</ul>
@@ -299,7 +274,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://stupidjoey.net/2019-04-22-fm_and_ffm_model.html" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://stupidjoey.net/2019-08-25-weekly_2019_8_19_8_15.html" alt="微信分享二维码">
     </div>
 </div>
 
@@ -313,18 +288,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019-04-24-deep_cross_network.html" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          DCN:Deep &amp; Cross Network for Ad Click Predictions
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019-04-20-ctr_prediction_model_summary.html" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">主流ctr预估模型梳理</div>
+    <a href="/2019-08-17-weekly_2019_8_12_8_18.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2019.8.12-8.18 敢于行动</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -351,7 +317,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">一、前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">二、FM模型(Factorization Machines)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">2.1.</span> <span class="toc-text">background</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">2.2.</span> <span class="toc-text">model</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">2.3.</span> <span class="toc-text">预估计算复杂度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">2.4.</span> <span class="toc-text">学习算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">2.5.</span> <span class="toc-text">高阶FM</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">三、FFM模型(Field-aware Factorization Machines)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">3.1.</span> <span class="toc-text">background</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">3.2.</span> <span class="toc-text">model</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">3.3.</span> <span class="toc-text">训练优化</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">四、开源工具</span></a></li></ol>
+                    目录，不存在的…
                     </div>
                 </span>
             </div>
@@ -386,7 +352,7 @@ if(true){
     repo: 'comment_for_blog',
     owner: 'stupidjoey',
     admin: ['stupidjoey'],
-    id: 'Mon Apr 22 2019 00:00:00 GMT+0800',
+    id: 'Sun Aug 25 2019 00:00:00 GMT+0800',
     distractionFreeMode: 'true'
 })
 gitalk.render('gitalk-container') 
