@@ -6,58 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://stupidjoey.net">
-  <title>word2vec简解 | stupidjoey&#39;s blog</title>
+  <title>2022 Review 失控与自控 | stupidjoey&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="对word2vec做一下总结，便于自己快速复习相关概念">
-<meta name="keywords" content="Deep Learning,ctr">
+  <meta name="description" content="2022年已经过去1个多月，正逢春节，决定还是要做下总结，人生短暂，每一年过得如何对我来说都非常重要，需要好好记录和反思。">
+<meta name="keywords" content="review">
 <meta property="og:type" content="article">
-<meta property="og:title" content="word2vec简解">
-<meta property="og:url" content="http://stupidjoey.net/2019-07-27-word2vec.html">
+<meta property="og:title" content="2022 Review 失控与自控">
+<meta property="og:url" content="http://stupidjoey.net/2023-01-24-2022-Review.html">
 <meta property="og:site_name" content="stupidjoey&#39;s blog">
-<meta property="og:description" content="对word2vec做一下总结，便于自己快速复习相关概念">
+<meta property="og:description" content="2022年已经过去1个多月，正逢春节，决定还是要做下总结，人生短暂，每一年过得如何对我来说都非常重要，需要好好记录和反思。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61990484-1403d080-b074-11e9-83e0-4ee96349ce7f.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61990517-bcb23000-b074-11e9-8247-7badb1dbd0ca.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61990636-e10f0c00-b076-11e9-865e-5d73abbae0a8.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61990638-e5d3c000-b076-11e9-9a03-16aaa5bc6296.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61991383-ec1b6980-b081-11e9-997b-019e678b7a30.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61991912-964abf80-b089-11e9-9e19-a3fc7d08ab51.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61991981-b038d200-b08a-11e9-8bdb-81cefc6fac08.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61991994-cf376400-b08a-11e9-85b0-10255df26bc8.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992081-01959100-b08c-11e9-95b0-6a501df531b0.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61991897-5be12280-b089-11e9-9aed-9bba85e36d8c.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992124-9c8e6b00-b08c-11e9-9a52-06e308b8445a.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992126-a57f3c80-b08c-11e9-9b52-210415fac5ea.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992134-c9428280-b08c-11e9-9956-ca1b7bd7a37a.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992139-ed9e5f00-b08c-11e9-89c3-fa1a88eaa8ce.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992169-600f3f00-b08d-11e9-856d-a3ef91f8fa1f.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992245-3c98c400-b08e-11e9-94ae-f8adb1996856.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992251-46222c00-b08e-11e9-911f-6ec4ee524017.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992263-7669ca80-b08e-11e9-929a-9e5a8f84fa9a.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992265-7c5fab80-b08e-11e9-991d-f228933c48da.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992266-81245f80-b08e-11e9-8ff8-7ff19b2bb4e8.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992270-8a153100-b08e-11e9-8e8d-3ce0f33add06.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992271-95685c80-b08e-11e9-834d-42b4fcfc85e2.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992349-ae254200-b08f-11e9-9b68-2f539c55f9d1.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992514-11b06f00-b092-11e9-9558-c3a6ef1b3408.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992516-170db980-b092-11e9-8c70-96658622f97e.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992517-1bd26d80-b092-11e9-9ca1-b4ebdc3c058d.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992522-27259900-b092-11e9-970a-09a0d1468a2e.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992542-5e944580-b092-11e9-8c9f-fe955e084b4a.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992554-7ff53180-b092-11e9-931c-13b23e114012.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992587-fbef7980-b092-11e9-9782-f6631b53235f.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992601-2b9e8180-b093-11e9-9279-26d2ac9db065.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992609-39ec9d80-b093-11e9-9ccf-c75b6c1dd337.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992767-fdba3c80-b094-11e9-8218-7a15c01ffdda.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992771-04e14a80-b095-11e9-9b54-88be2319db41.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992885-afa63880-b096-11e9-90e0-85a035d3e835.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/61992792-496ce600-b095-11e9-95d2-a89d9be49cfd.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/7859870/51072366-9b6e9100-169a-11e9-8a1f-624ff412fa54.jpg">
-<meta property="og:updated_time" content="2019-07-27T09:48:38.000Z">
+<meta property="og:updated_time" content="2023-02-04T04:11:29.661Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="word2vec简解">
-<meta name="twitter:description" content="对word2vec做一下总结，便于自己快速复习相关概念">
-<meta name="twitter:image" content="https://user-images.githubusercontent.com/7859870/61990484-1403d080-b074-11e9-83e0-4ee96349ce7f.png">
+<meta name="twitter:title" content="2022 Review 失控与自控">
+<meta name="twitter:description" content="2022年已经过去1个多月，正逢春节，决定还是要做下总结，人生短暂，每一年过得如何对我来说都非常重要，需要好好记录和反思。">
   
     <link rel="alternative" href="/atom.xml" title="stupidjoey&#39;s blog" type="application/atom+xml">
   
@@ -216,57 +178,101 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-word2vec" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-2022-Review" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      word2vec简解
+      2022 Review 失控与自控
     </h1>
   
 
         
-        <a href="/2019-07-27-word2vec.html" class="archive-article-date">
-  	<time datetime="2019-07-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-27</time>
+        <a href="/2023-01-24-2022-Review.html" class="archive-article-date">
+  	<time datetime="2023-01-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-01-24</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>对word2vec做一下总结，便于自己快速复习相关概念<br><a id="more"></a></p>
-<h3><span id="一-case">一、Case</span></h3><p>先来一个case，便于快速理解Word2vec</p>
-<p><img src="https://user-images.githubusercontent.com/7859870/61990484-1403d080-b074-11e9-83e0-4ee96349ce7f.png" alt="image"><br>我们有一些text，是一个一个句子，样本的搜集过程如上。设定window size为2，target word，窗口内的单词作为context word。</p>
-<p><img src="https://user-images.githubusercontent.com/7859870/61990517-bcb23000-b074-11e9-8247-7badb1dbd0ca.png" alt="image"></p>
-<p>把样本喂入模型进行训练，输入的时候，每一条样本先做ont-hot encoding，变成V维的向量（V是vocabulary大小），target word那一维是1，其余是0。 label中 target word的context words的地方都标为1，训练网络。</p>
-<p><img src="https://user-images.githubusercontent.com/7859870/61990636-e10f0c00-b076-11e9-865e-5d73abbae0a8.png" alt="image"><br><img src="https://user-images.githubusercontent.com/7859870/61990638-e5d3c000-b076-11e9-9a03-16aaa5bc6296.png" alt="image"><br>经过训练会产出两个权重矩阵，都可以作为word的vector向量。</p>
-<h3><span id="二-model">二、Model</span></h3><p>word2vec 有两种模型，分别是CBOW和Skip-gram</p>
-<h4><span id="21-cbow">2.1 CBOW</span></h4><p><img src="https://user-images.githubusercontent.com/7859870/61991383-ec1b6980-b081-11e9-997b-019e678b7a30.png" alt="image"></p>
-<p>cbow模型输入是context word，去预估target word。</p>
-<h5><span id="feed-forward">feed forward</span></h5><p><img src="https://user-images.githubusercontent.com/7859870/61991912-964abf80-b089-11e9-9e19-a3fc7d08ab51.png" alt="image"><br>中间隐层神经单元h是求avg<br><img src="https://user-images.githubusercontent.com/7859870/61991981-b038d200-b08a-11e9-8bdb-81cefc6fac08.png" alt="image"><br><img src="https://user-images.githubusercontent.com/7859870/61991994-cf376400-b08a-11e9-85b0-10255df26bc8.png" alt="image"><br>输出是求softmax<br><img src="https://user-images.githubusercontent.com/7859870/61992081-01959100-b08c-11e9-95b0-6a501df531b0.png" alt="image"><br><img src="https://user-images.githubusercontent.com/7859870/61991897-5be12280-b089-11e9-9aed-9bba85e36d8c.png" alt="image"></p>
-<p>lossfunc</p>
-<h5><span id="back-propagate">back propagate</span></h5><h6><span id="update-equation-for-hiddenoutput-weights">Update equation for hidden→output weights</span></h6><p><img src="https://user-images.githubusercontent.com/7859870/61992124-9c8e6b00-b08c-11e9-9a52-06e308b8445a.png" alt="image"><br><img src="https://user-images.githubusercontent.com/7859870/61992126-a57f3c80-b08c-11e9-9b52-210415fac5ea.png" alt="image"></p>
-<p><img src="https://user-images.githubusercontent.com/7859870/61992134-c9428280-b08c-11e9-9956-ca1b7bd7a37a.png" alt="image"><br>权重更新</p>
-<h5><span id="update-equation-for-inputhidden-weights">Update equation for input→hidden weights</span></h5><p><img src="https://user-images.githubusercontent.com/7859870/61992139-ed9e5f00-b08c-11e9-89c3-fa1a88eaa8ce.png" alt="image"><br><img src="https://user-images.githubusercontent.com/7859870/61992169-600f3f00-b08d-11e9-856d-a3ef91f8fa1f.png" alt="image"></p>
-<h4><span id="22-skip-gram">2.2 Skip-gram</span></h4><p><img src="https://user-images.githubusercontent.com/7859870/61992245-3c98c400-b08e-11e9-94ae-f8adb1996856.png" alt="image"></p>
-<p><img src="https://user-images.githubusercontent.com/7859870/61992251-46222c00-b08e-11e9-911f-6ec4ee524017.png" alt="image"></p>
-<p>loss func</p>
-<p><img src="https://user-images.githubusercontent.com/7859870/61992263-7669ca80-b08e-11e9-929a-9e5a8f84fa9a.png" alt="image"><br><img src="https://user-images.githubusercontent.com/7859870/61992265-7c5fab80-b08e-11e9-991d-f228933c48da.png" alt="image"><br><img src="https://user-images.githubusercontent.com/7859870/61992266-81245f80-b08e-11e9-8ff8-7ff19b2bb4e8.png" alt="image"><br><img src="https://user-images.githubusercontent.com/7859870/61992270-8a153100-b08e-11e9-8e8d-3ce0f33add06.png" alt="image"><br><img src="https://user-images.githubusercontent.com/7859870/61992271-95685c80-b08e-11e9-834d-42b4fcfc85e2.png" alt="image"></p>
-<h4><span id="三-tricks">三、Tricks</span></h4><p>不管是CBOW还是Skip-gram，在进行权重学习的时候，input-&gt;hidden中的权重矩阵<code>W</code>比较容易更新，因为每次只用更新input维中激活的w。但是在学习hidden-&gt;output的权重矩阵<code>W&#39;</code>的时候，如果vocabulary很大，学习效率就低，因为需要遍历每个word。 word2vec提供两种trick来提高学习的效率</p>
-<h5><span id="hierarchical-softmax">Hierarchical Softmax</span></h5><p><img src="https://user-images.githubusercontent.com/7859870/61992349-ae254200-b08f-11e9-9b68-2f539c55f9d1.png" alt="image"></p>
-<p>在hidden-&gt;output的过程中，用Hierarchical Softmax替换了原始的Softmax。如图用<code>L(w2)</code>表示从root到w2的距离。中间的每一个非叶子节点定义为<code>v‘</code>, n(w,j)表示第j个 unit on the path from root to word w</p>
-<p>首先，我们定义w2是output word的概率为<code>从root随着路径走到w2的概率</code>。<br><img src="https://user-images.githubusercontent.com/7859870/61992514-11b06f00-b092-11e9-9558-c3a6ef1b3408.png" alt="image"><br>向左走的概率<br><img src="https://user-images.githubusercontent.com/7859870/61992516-170db980-b092-11e9-8c70-96658622f97e.png" alt="image"><br>向右走的概率<br><img src="https://user-images.githubusercontent.com/7859870/61992517-1bd26d80-b092-11e9-9ca1-b4ebdc3c058d.png" alt="image"><br>走到w2的概率<br><img src="https://user-images.githubusercontent.com/7859870/61992522-27259900-b092-11e9-970a-09a0d1468a2e.png" alt="image"><br>走到所有叶子节点的概率累加肯定为1</p>
-<p><img src="https://user-images.githubusercontent.com/7859870/61992542-5e944580-b092-11e9-8c9f-fe955e084b4a.png" alt="image"><br><img src="https://user-images.githubusercontent.com/7859870/61992554-7ff53180-b092-11e9-931c-13b23e114012.png" alt="image"><br>将左右的情况抽象化，ch 函数表示是n的左节点，那么output 的概率可以表示为<br><img src="https://user-images.githubusercontent.com/7859870/61992587-fbef7980-b092-11e9-9782-f6631b53235f.png" alt="image"></p>
-<p><img src="https://user-images.githubusercontent.com/7859870/61992601-2b9e8180-b093-11e9-9279-26d2ac9db065.png" alt="image"><br>loss func<br><img src="https://user-images.githubusercontent.com/7859870/61992609-39ec9d80-b093-11e9-9ccf-c75b6c1dd337.png" alt="image"></p>
-<p>那么在hidden -&gt; output层，我一共只需要更新 L(w)个vector，L(w)近似于log(V)，实际需要更新的向量只有log(v)个，这个计算量级大大减少了<br><img src="https://user-images.githubusercontent.com/7859870/61992767-fdba3c80-b094-11e9-8218-7a15c01ffdda.png" alt="image"><br><img src="https://user-images.githubusercontent.com/7859870/61992771-04e14a80-b095-11e9-9b54-88be2319db41.png" alt="image"></p>
-<p>input-&gt;output这样更新<br><img src="https://user-images.githubusercontent.com/7859870/61992885-afa63880-b096-11e9-90e0-85a035d3e835.png" alt="image"></p>
-<h5><span id="negative-sampling">Negative Sampling</span></h5><p><img src="https://user-images.githubusercontent.com/7859870/61992792-496ce600-b095-11e9-95d2-a89d9be49cfd.png" alt="image"></p>
-<p>只采样部分负例进行更新</p>
-<h5><span id="reference">Reference</span></h5><p>[1] <a href="http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/" target="_blank" rel="noopener">http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/</a><br>[2] <a href="http://mccormickml.com/2017/01/11/word2vec-tutorial-part-2-negative-sampling/" target="_blank" rel="noopener">http://mccormickml.com/2017/01/11/word2vec-tutorial-part-2-negative-sampling/</a><br>[3] word2vec Parameter Learning Explained <a href="https://arxiv.org/abs/1411.2738" target="_blank" rel="noopener">https://arxiv.org/abs/1411.2738</a> Xin Rong </p>
-<hr>
-<p><img src="https://user-images.githubusercontent.com/7859870/51072366-9b6e9100-169a-11e9-8a1f-624ff412fa54.jpg" alt="38db85a4c595ca6"></p>
+        <p>2022年已经过去1个多月，正逢春节，决定还是要做下总结，人生短暂，每一年过得如何对我来说都非常重要，需要好好记录和反思。</p>
+<a id="more"></a>
+<h3><span id="一-做了什么">一 、做了什么</span></h3><h4><span id="计划做什么">计划做什么</span></h4><p>每年年初的时候都会做年度计划，基本都是围绕健康、工作、生活来设定OKR</p>
+<blockquote>
+<p>O1: 保证有个健康的身体、有趣的灵魂、快乐的生活，持续成长<br>O2: 发展路线转型试水，构建个人品牌，以代码和媒体作为杠杆提升自己的产出<br>O3: 深入研究信息过载、推荐系统等领域，构建自己的解决思路和产品价值评估体系，帮助用户缓解信息焦虑</p>
+</blockquote>
+<p>但是OKR的记录和更新就维持到4月，就开始陷入到了准备换工作的各种琐事中了。</p>
+<h4><span id="换工作">换工作</span></h4><p>21年底各大互联网公司纷纷开启裁员模式，在这个氛围下，公司加班的强度也逐渐增大，4、5月我去年招的2个同学纷纷提出离职，1个是生病了，到了需要做手术的地步，索性决定离开互联网行业，另1个也是觉得当前的环境跟自己理想的节奏不太一样，直接裸辞了。在带小团队的我，每天有处理不完的低级事情，周末都在查问题，丝毫没有成长感和满足感，我感觉自己像<strong>失控</strong>的列车，为了薪水我不得不继续行驶下去，但又不知终将行驶到何方，没有时间空下来调整方向。他们的离开就像导火索一样，触发了我跟老板沟通<strong>口头</strong>提了离职。<br>从5月份开始，一直到10月份，中间经历了换团队、换老板，周围认识的同事大批量的离职，而我一直在慢慢地刷题、投简历和面试，一共也只面试了几家公司。<br>找工作的过程中，我渐渐意识到自己想的还是太简单:</p>
+<ul>
+<li>国内互联网公司很难做到work life balance</li>
+<li>大多数单位都得随时跟进老板的问题，不过是从一个坑跑到另一个坑</li>
+<li>比自己当前处境好的公司，并没有太多 </li>
+<li>我还是需要钱，空窗期不能太久，裸辞不是一个好的选择</li>
+<li>符合自己要求的工作可能得是自己创造出来的，而不是找出来的</li>
+</ul>
+<p>最终我还是选择继续在当前的公司苟着。找工作的间隙也开始关注web3、AIGC，23年还是会持续关注好的就业机会，希望能够会有所变化。</p>
+<h4><span id="完善自己的信息流">完善自己的信息流</span></h4><blockquote>
+<p>先建立自己的信息秩序，再建立自己的内心秩序。</p>
+</blockquote>
+<p>22主要是在继续丰富自己的信息输入来源，在工具上也做了一些优化，当前的情况是：</p>
+<p><strong>输入和对应的工具</strong>：</p>
+<ul>
+<li>RSS内容：通过werss和feeddd来抓取公众号，搭建freshRss服务，通过RSSHub插件来抓取其他喜欢的blog</li>
+<li>视频：Youtube、B站</li>
+<li>书：微信读书、kindle、boox</li>
+<li>播客：小宇宙</li>
+<li>twitter</li>
+<li>稍后读：pocket<br><strong>输出</strong>：</li>
+<li>flomo</li>
+<li>obsidian</li>
+<li>blog</li>
+</ul>
+<p>我自己今年也有一些体会</p>
+<ul>
+<li>优质有深度的中文内容确实不太多，需要刻意去补充英文来源的输入</li>
+<li>播客每天占据我的时间在逐渐增多，但经常觉得优质的内容很快就消费完了，需要扩展来源，比如视频转音频、有声书、英文播客等</li>
+<li>还是没有戒掉垃圾短视频对自己时间的侵占<br>信息流整个流程还是需要持续优化，效率的提升能让同等时间内获得更多的信息，23年希望能形成更加高效、稳定、多元的信息流，帮助自己完善信息获取的秩序。</li>
+</ul>
+<h4><span id="个人品牌建设">个人品牌建设</span></h4><p>受Naval的影响，自己一直认为个人品牌的建设非常重要。22年末尾的2个月也确实更近一步做了一些尝试：</p>
+<ul>
+<li>开始写newsletter。刚写了2期，也没有人关注，发布用的Revue同时也被twitter下架了。热情熄灭后，让我开始反思做这件事的意义，可能需要先累积点订阅者，有些反馈后才会继续更新。</li>
+<li>重新重视起了blog。不想在各个平台做<strong>赛博佃农</strong>，流量最好都回归到自己可以控制的地方</li>
+<li>准备筹划播客。虽然知道自己真不一定有时间做下去，但还是希望趁热情还在的时候做起来，相信对自己会有帮助<br>随着各类平台的兴起、创作工具的优化，以及AIGC的颠覆性效果，我相信未来会是个人创作者的时代。不过最近认真想了想，高频的发文量、对热点事件的迎合，并不能带来忠实和高价值的粉丝关系，优质的内容输出并能给内容消费者带来成长才是应该长期追求的方向。</li>
+</ul>
+<h3><span id="二-读了什么">二、读了什么</span></h3><p>去年一共读了17本书，基本上每年也就是10几本的样子，在年初和年末空闲的时间会较多，读的也多一些，中间也就没什么输入。<br><strong>人物传记</strong>：</p>
+<ul>
+<li>一生的旅程</li>
+<li>详谈:沈鹏</li>
+<li>详谈:左晖</li>
+<li>详谈:张勇</li>
+<li>详谈:赵鹏</li>
+<li>邓小平时代<br><strong>虚构类小说</strong>：</li>
+<li>夜晚的潜水艇</li>
+<li>克莱因壶<br><strong>商业</strong>：</li>
+<li>智能交通<br><strong>认知、效率</strong>：</li>
+<li>The Effective Engineer</li>
+<li>每周工作4小时</li>
+<li>效率脑科学</li>
+<li>我们为什么要睡觉</li>
+<li>纳瓦尔宝典<br><strong>技术</strong>：</li>
+<li>一本书读懂Web3.0</li>
+<li>白话区块链</li>
+<li>卡片笔记写作法<br>发现自己这几年看的认知、效率类的书籍比较多，很多观点会比较重复，看的时候会觉得很快，但实际带来的边际效益并没有那么多了。还是需要按技能树的方式去扩展，每个方向看几本就行，也应如《越读者》中所说调节好自己的阅读饮食。</li>
+</ul>
+<h3><span id="去了哪里">去了哪里</span></h3><p>22年变得非常宅，基本哪都没去。疫情的反复、工作的繁忙，导致自己回顾过去这一年的照片，除了和女朋友出去吃饭，基本就是在北京城内随便逛逛。</p>
+<h3><span id="深刻的记忆">深刻的记忆</span></h3><ul>
+<li>4、5月周围同事的大幅离职，感到沮丧和无力感</li>
+<li>6月参加表妹的婚礼，全家人都在一起很温暖</li>
+<li>作为外部公司的面试者和自己团队面试官时内心的冲突</li>
+<li>11月外婆的离开，后悔没有好好珍惜跟亲人在一起的时光</li>
+<li>12月疫情的忽然放开，对管控的愤怒和对追求自由的后知后觉</li>
+<li>过去一年跟女朋友日常生活的点点滴滴，开心和争吵常在，有了生活感</li>
+</ul>
+<p>如果没有文字、照片、视频，我的记忆会逐渐淡化，23年会多拍拍照片和视频，尽量留住每一瞬间</p>
+<h3><span id="2023计划做什么">2023计划做什么</span></h3><p>23年，我希望好好把握住时间，找到自己对人生的<strong>控制力</strong>。健身、做饭、旅行、阅读，多增加些<strong>自己主动想做的事情的时间</strong>，减少些被老板的case和低级的工作推着走的失控时间。</p>
 
       
 
@@ -306,11 +312,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ctr</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">review</a>
         		</li>
       		
 		</ul>
@@ -369,7 +371,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://stupidjoey.net/2019-07-27-word2vec.html" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://stupidjoey.net/2023-01-24-2022-Review.html" alt="微信分享二维码">
     </div>
 </div>
 
@@ -383,18 +385,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2020-05-30-MOBIUS_Towards_the_Next_Generation_of_Query-Ad_Matching_in_Baidus_Sponsored_Search.html" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          MOBIUS Towards the Next Generation of Query-Ad Matching in Baidu’s Sponsored Search
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019-04-28-gbdt_and_xgboost_model.html" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">gbdt&amp;xgboost小结</div>
+    <a href="/2022-12-25-Stupidjoey's Weekly Vol.2.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Stupidjoey&#39;s Weekly Vol.2 杨过与杨康</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -421,7 +414,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">一、Case</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">二、Model</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 CBOW</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">2.1.1.</span> <span class="toc-text">feed forward</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">2.1.2.</span> <span class="toc-text">back propagate</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#undefined"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">Update equation for hidden→output weights</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">2.1.3.</span> <span class="toc-text">Update equation for input→hidden weights</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 Skip-gram</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">2.3.</span> <span class="toc-text">三、Tricks</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">2.3.1.</span> <span class="toc-text">Hierarchical Softmax</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">2.3.2.</span> <span class="toc-text">Negative Sampling</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">2.3.3.</span> <span class="toc-text">Reference</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">一 、做了什么</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">计划做什么</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.</span> <span class="toc-text">换工作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.3.</span> <span class="toc-text">完善自己的信息流</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.4.</span> <span class="toc-text">个人品牌建设</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">二、读了什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">去了哪里</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">深刻的记忆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">2023计划做什么</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -456,7 +449,7 @@ if(true){
     repo: 'comment_for_blog',
     owner: 'stupidjoey',
     admin: ['stupidjoey'],
-    id: 'Sat Jul 27 2019 00:00:00 GMT+0800',
+    id: 'Tue Jan 24 2023 00:00:00 GMT+0800',
     distractionFreeMode: 'true'
 })
 gitalk.render('gitalk-container') 
