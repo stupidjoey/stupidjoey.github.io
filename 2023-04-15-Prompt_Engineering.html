@@ -6,27 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://stupidjoey.net">
-  <title>计算广告基础概念整理 | stupidjoey&#39;s blog</title>
+  <title>Prompt Engineer | stupidjoey&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="入职后发现自己所在的部门是在做广告变现这一块，所以买了刘鹏的《计算广告》这本书来学习一下，算是国内对计算广告这一块做总结和整理的第一本书吧。本文主要对书中提到的一些基础概念做一些简单的整理。">
-<meta name="keywords" content="计算广告">
+  <meta name="description" content="要让chatgpt回答更准确、专业，prompt engineering必不可少，以下是最近读了相关资料的一些总结">
+<meta name="keywords" content="LLM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="计算广告基础概念整理">
-<meta property="og:url" content="http://stupidjoey.net/2016-07-02-computational-ad-basic-concepts.html">
+<meta property="og:title" content="Prompt Engineer">
+<meta property="og:url" content="http://stupidjoey.net/2023-04-15-Prompt_Engineering.html">
 <meta property="og:site_name" content="stupidjoey&#39;s blog">
-<meta property="og:description" content="入职后发现自己所在的部门是在做广告变现这一块，所以买了刘鹏的《计算广告》这本书来学习一下，算是国内对计算广告这一块做总结和整理的第一本书吧。本文主要对书中提到的一些基础概念做一些简单的整理。">
+<meta property="og:description" content="要让chatgpt回答更准确、专业，prompt engineering必不可少，以下是最近读了相关资料的一些总结">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://o9pzffu9y.bkt.clouddn.com/computational-ad-basic-concepts-1.jpg">
-<meta property="og:image" content="http://o9pzffu9y.bkt.clouddn.com/computational-ad-basic-concepts-2.jpg">
-<meta property="og:image" content="http://o9pzffu9y.bkt.clouddn.com/computational-ad-basic-concepts-3.jpg">
-<meta property="og:image" content="http://o9pzffu9y.bkt.clouddn.com/Display-LUMAscape_2012-04-05.jpg">
-<meta property="og:image" content="http://o9pzffu9y.bkt.clouddn.com/China-Programmatic-Ad-Tech_201605_Release_V3.png">
-<meta property="og:image" content="http://o9pzffu9y.bkt.clouddn.com/computational-ad-basic-concepts-4.jpg">
-<meta property="og:updated_time" content="2019-04-22T15:20:05.000Z">
+<meta property="og:image" content="https://learningprompt.wiki/assets/images/FewShotChainOfThought001-cb0c8729dadd349fa916ca44c1c18404.png">
+<meta property="og:image" content="https://learningprompt.wiki/assets/images/SelfConsistency001-ae4a23fdbe90d35f633b1af73f721887.png">
+<meta property="og:image" content="https://learningprompt.wiki/assets/images/PAL001-a4da9f4a3d1e1cecc513e61aa23ce8bd.png">
+<meta property="og:updated_time" content="2023-04-15T06:55:39.206Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="计算广告基础概念整理">
-<meta name="twitter:description" content="入职后发现自己所在的部门是在做广告变现这一块，所以买了刘鹏的《计算广告》这本书来学习一下，算是国内对计算广告这一块做总结和整理的第一本书吧。本文主要对书中提到的一些基础概念做一些简单的整理。">
-<meta name="twitter:image" content="http://o9pzffu9y.bkt.clouddn.com/computational-ad-basic-concepts-1.jpg">
+<meta name="twitter:title" content="Prompt Engineer">
+<meta name="twitter:description" content="要让chatgpt回答更准确、专业，prompt engineering必不可少，以下是最近读了相关资料的一些总结">
+<meta name="twitter:image" content="https://learningprompt.wiki/assets/images/FewShotChainOfThought001-cb0c8729dadd349fa916ca44c1c18404.png">
   
     <link rel="alternative" href="/atom.xml" title="stupidjoey&#39;s blog" type="application/atom+xml">
   
@@ -185,108 +182,125 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-computational-ad-basic-concepts" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Prompt_Engineering" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      计算广告基础概念整理
+      Prompt Engineer
     </h1>
   
 
         
-        <a href="/2016-07-02-computational-ad-basic-concepts.html" class="archive-article-date">
-  	<time datetime="2016-07-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-07-02</time>
+        <a href="/2023-04-15-Prompt_Engineering.html" class="archive-article-date">
+  	<time datetime="2023-04-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>入职后发现自己所在的部门是在做广告变现这一块，所以买了刘鹏的<code>《计算广告》</code>这本书来学习一下，算是国内对计算广告这一块做总结和整理的第一本书吧。本文主要对书中提到的一些基础概念做一些简单的整理。</p>
-<a id="more"></a>
-<h2><span id="常见概念及缩写">常见概念及缩写</span></h2><p>　　介绍一下在计算广告中常常要涉及到的概念，在后文中会对其做出解释。</p>
-<ul>
-<li>ADX (AD eXchange)　　广告交易平台</li>
-<li>ADN (AD Network)　　广告网络</li>
-<li>CTR (Click Through Rate)　　点击率</li>
-<li>CPA (Cost Per Action)　　按转化付费</li>
-<li>CPC (Cost Per Click)　　按点击付费</li>
-<li>CPM (Cost Per Mile)　　按千次展示付费</li>
-<li>CPS (Cost Per Sale)　　按销售额付费</li>
-<li>CPT (Cost Per Time)　　按时间付费</li>
-<li>DMP (Data Management Platform)　　数据管理平台</li>
-<li>DSP (Demand Side Platform)　　需求方平台</li>
-<li>eCPM (Expected Cost Per Mile)　　千次展示期望收入</li>
-<li>GD (Guaranteed Delivery)　　担保式投送</li>
-<li>PMP (Private Marketplace)　　私有交易市场</li>
-<li>RTB (Real Time Bidding)　　实时竞价</li>
-<li>ROI (Return on Investment)　　投入产出比</li>
-<li>RPM (Revenue Per Mile)　　千次展示收益</li>
-<li>SSP (Supply Side Platform)　　供给方平台</li>
-<li>TD (Trading Desk)　　交易终端</li>
+        <p>要让chatgpt回答更准确、专业，prompt engineering必不可少，以下是最近读了相关资料的一些总结<br><a id="more"></a></p>
+<h1><span id="基础">基础</span></h1><ul>
+<li>Prompt 里最好包含完整的信息<ul>
+<li>【badcase】 <code>Write a poem about OpenAI.</code></li>
+<li>【goodcase】<code>Write a short inspiring poem about OpenAI, focusing on the recent DALL-E product launch (DALL-E is a text to image ML model) in the style of a {famous poet}</code></li>
 </ul>
-<h2><span id="广告的定义">广告的定义</span></h2><p>　　书中先援引了《当代广告学》中对于广告的定义:</p>
-<blockquote>
-<p>广告是由已确定的出资人通过各种媒介进行的有关产品（商品、服务和观点）的，通常是有偿的、有组织的、综合的、劝服性的非人员的信息传播活动。</p>
-</blockquote>
-<p>　　讲的是什么鬼，完全看不懂。但是没关系，里面指出了广告活动的两个主动参与方——<strong>出资人</strong>和<strong>媒体</strong>，可以用更一般性的词语来描述：广告的<strong>需求方</strong>和<strong>供给方</strong>。除此之外，这里面还有一个被动的参与方，受众。<strong>出资人、媒体和受众</strong>这三者是广告活动永远的主线，在计算广告中，也不例外。</p>
-<h2><span id="广告的有效性模型">广告的有效性模型</span></h2><p><img src="http://o9pzffu9y.bkt.clouddn.com/computational-ad-basic-concepts-1.jpg" alt="ad flow"></p>
-<p>（图1 广告的有效性模型  来源于《计算广告》）</p>
-<p>　　如图1是广告的有效性模型，大致可以分为<strong>选择、解释和态度</strong>三个部分，更细致一点可以划分为6个过程。其中<strong>曝光</strong>指广告物理上展现出来的过程，广告位的影响是巨大的；<strong>关注</strong>指受众从物理上接触广告到意识上注意到它的过程，曝光并不等同于关注，尽量不要打断用户的任务以及明确传达推送此广告的原因会提高关注阶段的效率；<strong>理解</strong>指用户能够理解广告，不要搞得太玄乎；<strong>接受</strong>指在理解广告的基础上认可这些信息，如果传达的信息不适当，可能会起到负面的效果；<strong>保持</strong>阶段指用户对于广告的印象，如果能留下长期的记忆，那是再好不过啦；<strong>决策</strong>，最后的转化再次一举。</p>
-<h2><span id="计算广告的核心问题">计算广告的核心问题</span></h2><p>　　<a href="https://en.wikipedia.org/wiki/Andrei_Broder" target="_blank" rel="noopener"><code>Andrei Broder</code></a>(并不认识 - -)在提出计算广告概念的同时，也提出了它的核心挑战：</p>
-<blockquote>
-<p>Find the best match between a given user in a given context and a suitable advertisement</p>
-</blockquote>
-<p>　　在此基础上，刘鹏对其做了一些修改：</p>
-<blockquote>
-<p>计算广告的核心问题，是为一系列用户与环境的组合找到最合适的广告投放策略以优化整体广告活动的利润。</p>
-</blockquote>
-<p>　　首先，他强调了广告问题优化是一组展示上的效果，而非某一次孤立展示的效果；其次，去掉了<strong>given</strong>字眼，是因为在某些广告产品中并不一定能拿到用户或者上下文标识。</p>
-<p>　　实际上，可以把它转化成一个优化的问题：</p>
-<p>$$max\sum _{i=1}^{T}(r_i-q_i)$$</p>
-<p>　　其中<code>i</code>代表从第1次到第T次之间的1次广告展示，<code>r</code>表示收入，<code>q</code>表示成本，优化的目标是取得最大的利润。</p>
-<p>　　如果进一步的分解，可以认为收入和成本都是与广告<code>a</code>、用户<code>u</code>以及上下文环境<code>c</code>有关系的</p>
-<p>$$ max\sum _{i=1}^{T}(r(a_i,u_i,c_i)-q(a_i,u_i,c_i)) $$</p>
-<p>　　当然，这里的假设是整体的收入和成本是可以分解到每次展示上的，实际中会采取频次控制、点击反馈等方式来对付多次展示之间的效果相关性问题。</p>
-<h2><span id="在线广告简史">在线广告简史</span></h2><p>　　在线媒体（如AOL、Yahoo!）刚产生的时候，流量变现的最基本方式就是照搬线下广告的<strong>合约式的展示方式</strong>，即按照合同的方式确定某一广告位一段时间内为某广告主独占。随着互联网的高速发展，媒体希望提高收入，他们发现可以通过用户定向来把同一广告位的不同受众群体卖给不同广告主，提高流量收入，这种广告投放方式成为<strong>定向广告</strong>。它实际上还是以合约的方式来进行，媒体向广告主保证投放量，这种称为<strong>担保式投送（GD）</strong>，遵循千次展示付费的计费方式（CPM）。</p>
-<p>　　随着受众定向的不断发展，定向的程度越来越精细，按照原来的合约式的方式来售卖广告会有很多麻烦，例如很难对精细的标签流量做准确预估，另外当一个展示满足多个合约时，如果仅仅按照投放量的简单约束来分配广告，可能会使收益无法最大化，于是放弃了合约的思路，进化出了革命性的产品模式——<strong>竞价广告</strong>。实际上，竞价广告最初诞生于搜索广告领域，因为搜索上可以非常精细地进行定向，所以自然地采用了竞价的方式售卖广告。产生竞价广告的原因就是对每一次展示都可以按照收益最高的原则来做决策。在这种模式下，供给方不再向广告主做出量的保证。</p>
-<p>　　基于<strong>竞价机制和精准定向</strong>，在线广告分化出了<strong>广告网络（ADN）</strong>这种形态，它批量地运营媒体的广告位资源，按照人群或者上下文标签卖给广告的需求方，并用竞价的方式决定流量分配。同时也出现了为需求方服务的产品<strong>交易终端（TD）</strong>，它可以面向多个ADN或者媒体按人群一站式的采买广告并优化ROI。</p>
-<p>　　然而，在ADN中，核心的竞价逻辑是封闭，它只提供出价的接口，这并不能满足需求方的利益要求。需求方需要定制化的人群定向，于是产生了一个开放的竞价逻辑，让需求方按照自己的人群定义来挑选流量，这个逻辑称为<strong>实时竞价（RTB）</strong>。它将拍卖的过程由广告主预先出价变为每次展示时实时出价，只要把广告展示的上下文以及访客的用户标识等信息传给需求方，需求方就可以完成符合自己要求的定制的人群选择和出价。在此基础上，出现了聚合大量媒体剩余流量并用实时竞价为流量变现的产品<strong>广告交易平台(ADX)</strong>。在需求方这一侧，则出现了<strong>需求方平台（DSP）</strong>，它通过实时竞价的方式按照定制化的人群购买广告。</p>
-<p>　　在线广告的发展也催生了各种不同的广告产品，如图2。各个广告产品的特点下次再细讲了。</p>
-<p><img src="http://o9pzffu9y.bkt.clouddn.com/computational-ad-basic-concepts-2.jpg" alt="ad products"></p>
-<p>（图2 在线广告产品进化示意图 来源于《计算广告》）</p>
-<p>　</p>
-<h2><span id="在线广告结算方式比较">在线广告结算方式比较</span></h2><p><img src="http://o9pzffu9y.bkt.clouddn.com/computational-ad-basic-concepts-3.jpg" alt="ad ways"></p>
-<p>（图3 在线广告结算方式比较 来源于《计算广告》）</p>
-<p>图３列出了几种广告中常见的付费方式，并对它们的适用场景和优缺点都做了总结。</p>
-<h2><span id="受众定向的方法">受众定向的方法</span></h2><p>　　受众定向有一些典型的方法：</p>
-<ul>
-<li>地域定向。计算非常简单</li>
-<li>人口属性定向。包括年龄、性别、教育程度、收入水平等。与兴趣标签不同的是，它可以通过采样加调研的方式来判断一次定向中有多少比例是正确的，不过除非有专门的数据来源，例如SNS，一般情况下很难准确定向</li>
-<li>频道定向。 比较适用于离转化比较近的垂直类媒体，例如汽车、母婴、购物导航等</li>
-<li>上下文定向。 可以根据网页的具体内容来进行定向，是ADN中首选的定向方式之一。</li>
-<li>行为定向。 根据用户的历史访问行为了解用户的兴趣，从而投送相关广告。它之所以重要是因为提供了一种一般性的思路，使得在互联网上收集到的用户行为数据可以产生变现的价值。</li>
-<li>精确位置定向。移动设备上，利用蜂窝信息或者GPS来定向</li>
-<li>重定向。对广告主过去某一段时间的访客投放广告。被公认为精准程度最高、效果最突出的定向方式，不过人群覆盖量比较小。</li>
-<li>新客推荐定向。 根据广告主提供的种子用户信息，找到相似的潜在客户。</li>
+</li>
+<li>Prompt 最好简洁易懂，并减少歧义<ul>
+<li>【case】<code>Use a 3 to 5 sentence paragraph to describe this product.</code></li>
 </ul>
-<h2><span id="国内外广告市场结构">国内外广告市场结构</span></h2><p>　　最后上两张广告市场结构的图，列出了在广告市场不同领域的杰出公司，一张是经典的LUMA的图，是总结国外广告市场的，另一张是RTBChina总结国内广告市场的图。广告市场变化很快，很多公司都会做多个领域的工作，所以图不一定准确。</p>
-<p><img src="http://o9pzffu9y.bkt.clouddn.com/Display-LUMAscape_2012-04-05.jpg" alt="LUMA scape"></p>
-<p>（图4 国外广告市场 来源于LUMAscape）</p>
-<p><img src="http://o9pzffu9y.bkt.clouddn.com/China-Programmatic-Ad-Tech_201605_Release_V3.png" alt="RTBChina ad"></p>
-<p>(图5 国内广告市场 来源于RTBChina)</p>
-<p>　　广告市场纷繁复杂，看来我还要花大量时间去学习呀~</p>
-<h2><span id="大数据问题的特性">大数据问题的特性</span></h2><p>　　最后插一张刘鹏在书的开头谈到的关于大数据问题的图。<br><img src="http://o9pzffu9y.bkt.clouddn.com/computational-ad-basic-concepts-4.jpg" alt="big data"></p>
-<p>（图6 大数据问题的特性 来源于《计算广告》）</p>
-<p>　　刘鹏把数据问题划分为3类：</p>
-<p>　　(1)C类问题。如果对数据进行采样后解决问题的效果（目标函数）没有太大的下降，那么这不算是大数据问题，完全可以通过较小的样本来求目标。</p>
-<p>　　(2)A类问题。如果采样后效果下降很快，只能用全量数据来处理，那么这就是大数据问题。</p>
-<p>　　(3)B类问题。在实践中，大数据和小数据是没有一定的界限的，有些时候可以选取中等规模的数据来解决，这个就要看自己的判断力了。</p>
-<p>　　在解决问题的时候，首先我们要分析出它属于哪类问题，不要一开始就叫嚣着大数据大数据，解决不同类型问题有不同的工具，过度地强调大不一定好。</p>
-<p><br><br><br><br><br><br>转载请注明出处  <a href="http://stupidjoey.net/2016-07-02-computational-ad-basic-concepts.html">http://stupidjoey.net/2016-07-02-computational-ad-basic-concepts.html</a></p>
+</li>
+<li>尽量告诉LLM应该做什么，而非not to do</li>
+<li>增加示例<ul>
+<li>【case】<code>Prompt:Q1 -&gt; A1；Q2 -&gt; A2；Q3 -&gt;</code></li>
+</ul>
+</li>
+<li>角色设定<ul>
+<li>【case】<code>You are a primary school teacher who can explain complex content to a level that a 7 or 8 year old child can understand.</code></li>
+</ul>
+</li>
+</ul>
+<h1><span id="用法">用法</span></h1><ul>
+<li>问答</li>
+<li>推理<ul>
+<li>如果你想用 ChatGPT API 做点什么小应用，我建议可以从这个场景入手，相对来说没有其他场景那么红海</li>
+</ul>
+</li>
+<li>生成<ul>
+<li>写代码</li>
+</ul>
+</li>
+<li>改写<ul>
+<li>翻译：将中文文档翻译成英文，亦或者将英文翻译成中文。关于翻译，我还想强调，像 ChatGPT 除了能翻译人类的语言外，还能翻译编程语言，比如将 Python 代码翻译成 Haskell 代码。</li>
+<li>修改：修改内容的语法，甄别内容里的错别字。</li>
+<li>润色：润色文章，将内容改成另一种风格</li>
+<li>【case】<code>You are a primary school teacher who can explain complex content to a level that a 7 or 8 year old child can understand. Please rewrite the following sentences to make them easier to understand: {Text}</code></li>
+<li>【case】<code>Imagine you are the famous writer David Foster Wallace, please rewrite this sentences.</code></li>
+</ul>
+</li>
+<li><p>信息解释</p>
+<ul>
+<li>【case】  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Explanation of what the code does: </span><br><span class="line">-  Python 3 </span><br><span class="line">	- def remove_common_prefix(x, prefix, ws_prefix): </span><br><span class="line">	- x[&quot;completion&quot;] = x[&quot;completion&quot;].str[len(prefix) :]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>信息总结</p>
+</li>
+<li>【case】<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Extract the important entities mentioned in the article below. First extract all company names, then extract all people names, then extract specific topics which fit the content and finally extract general overarching themes </span><br><span class="line">  Desired format: </span><br><span class="line">  Company names: &lt;comma_separated_list_of_company_names&gt; </span><br><span class="line">  People names: -||- </span><br><span class="line">  Specific topics: -||- </span><br><span class="line">  General themes: -||- ([View Highlight](https://read.readwise.io/read/01gy1g4vw1p02yzr2e18dgw3hd))</span><br><span class="line">- Text: &quot;&quot;&quot;Powering Next Generation ...&quot;&quot;&quot;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>【case】让模型输出特定的结构化答案(比如JSON/Markdown等)。 也可以方便集成更多的额外要求, 比如增加一个”confidence level”, 并通过 prompt 的形式指定这些数值的格式与甚至区间<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;context&#125;</span><br><span class="line">Question: What is bond duration mentioned here. </span><br><span class="line">Answer template (Valid JSON format):&#123;&#123;&quot;duration&quot;: $duration_numeric_value_in_year, &quot;confidence_level&quot;: $answer_confidence_level_high_moderate_or_low, &#125;&#125;</span><br><span class="line">Answer:</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>信息提取<ul>
+<li>使用 ”“” 或 ### 符号将指令和需要处理的文本分开 </li>
+<li>【case】<code>Please summarize the following sentences to make them easier to understand. Text: &quot;&quot;&quot; {TEXT} &quot;&quot;&quot;</code></li>
+</ul>
+</li>
+</ul>
+<h1><span id="models">Models</span></h1><ul>
+<li>frame1:<ul>
+<li>Instruction（必须）： 指令，即你希望模型执行的具体任务。</li>
+<li>Context（选填）： 背景信息，或者说是上下文信息，这可以引导模型做出更好的反应。</li>
+<li>Input Data（选填）： 输入数据，告知模型需要处理的数据。</li>
+<li>Output Indicator（选填）： 输出指示器，告知模型我们要输出的类型或格式</li>
+</ul>
+</li>
+<li>frame2: CRISPE<ul>
+<li>CR： Capacity and Role（能力与角色）。你希望 ChatGPT 扮演怎样的角色。</li>
+<li>I： Insight（洞察力），背景信息和上下文（坦率说来我觉得用 Context 更好）。</li>
+<li>S： Statement（指令），你希望 ChatGPT 做什么。</li>
+<li>P： Personality（个性），你希望 ChatGPT 以什么风格或方式回答你。</li>
+<li>E： Experiment（尝试），要求 ChatGPT 为你提供多个答案</li>
+</ul>
+</li>
+<li>Chain of Thought<ul>
+<li>只需要在问题的结尾里放一句 <code>Let‘s think step by step</code> ，模型输出的答案会更加准确</li>
+<li>也可以用  <code>Let&#39;s work this out in a step by step way to be sure we have the right answer</code></li>
+<li>仅在使用大于等于 100B 参数的模型时，才会生效</li>
+</ul>
+</li>
+<li>通过向大语言模型展示一些少量的样例，并在样例中解释推理过程，大语言模型在回答提示时也会显示推理过程。这种推理的解释往往会引导出更准确的结果<ul>
+<li><img src="https://learningprompt.wiki/assets/images/FewShotChainOfThought001-cb0c8729dadd349fa916ca44c1c18404.png" alt="FewShotChainOfThought001.png"> </li>
+</ul>
+</li>
+<li>Self-Consistency <ul>
+<li>是对 Chain of Thought 的一个补充，它能让模型生成多个思维链，然后取最多数答案的作为最终结果</li>
+<li><img src="https://learningprompt.wiki/assets/images/SelfConsistency001-ae4a23fdbe90d35f633b1af73f721887.png" alt="SelfConsistency001.png"></li>
+</ul>
+</li>
+<li>PAL Models (Program-Aided Language Models)<ul>
+<li>在 prompt 里引入代码，并引导模型使用代码来运算和思考</li>
+<li><img src="https://learningprompt.wiki/assets/images/PAL001-a4da9f4a3d1e1cecc513e61aa23ce8bd.png" alt="PAL001.png"></li>
+</ul>
+</li>
+</ul>
+<p>Reference </p>
+<ul>
+<li><a href="https://learningprompt.wiki/docs/chatgpt-learning-path" target="_blank" rel="noopener">https://learningprompt.wiki/docs/chatgpt-learning-path</a></li>
+</ul>
 
       
 
@@ -326,7 +340,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">计算广告</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LLM</a>
         		</li>
       		
 		</ul>
@@ -385,7 +399,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://stupidjoey.net/2016-07-02-computational-ad-basic-concepts.html" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://stupidjoey.net/2023-04-15-Prompt_Engineering.html" alt="微信分享二维码">
     </div>
 </div>
 
@@ -399,15 +413,11 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2018-10-07-Wide-And-Deep-Learning-for-Recommender-Systems.html" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Wide &amp; Deep Learning for Recommender Systems
-        
-      </div>
-    </a>
   
+    <a href="/2023-01-24-2022-Review.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2022 Review 失控与自控</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -432,7 +442,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">常见概念及缩写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">广告的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">广告的有效性模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">计算广告的核心问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">在线广告简史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.</span> <span class="toc-text">在线广告结算方式比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">7.</span> <span class="toc-text">受众定向的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">8.</span> <span class="toc-text">国内外广告市场结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">9.</span> <span class="toc-text">大数据问题的特性</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">基础</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">用法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">Models</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -467,7 +477,7 @@ if(true){
     repo: 'comment_for_blog',
     owner: 'stupidjoey',
     admin: ['stupidjoey'],
-    id: 'Sat Jul 02 2016 00:00:00 GMT+0800',
+    id: 'Sat Apr 15 2023 00:00:00 GMT+0800',
     distractionFreeMode: 'true'
 })
 gitalk.render('gitalk-container') 
